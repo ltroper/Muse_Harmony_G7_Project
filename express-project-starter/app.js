@@ -1,5 +1,6 @@
 const createError = require('http-errors');
 const express = require('express');
+const asyncHandler = require('express-async-handler');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
