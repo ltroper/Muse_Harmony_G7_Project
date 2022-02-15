@@ -1,9 +1,12 @@
-div.hidden.login-form
-    form(action="/" method="POST")
-        input(type="hidden" name="_csrf" value=csrfToken)
-        label(for="email") Email
-        input(type="email" name="email" required)
-        label(for="hashPassword") Password
-        input(type="text" name="hashPassword" required)
-        button Submit
-        button Cancel
+extends layout.pug
+
+block content
+    div.hidden.login-form
+        form(action="/users/login" method="POST")
+            input(type="hidden" name="_csrf" value=csrfToken)
+            label(for="email") Email
+            input(type="email" name="email" required)
+            label(for="password") Password
+            input(type="password" name="password" required)
+            button Submit
+            button Cancel

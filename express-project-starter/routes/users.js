@@ -25,7 +25,7 @@ const signupValidators = [
     .isLength({ max: 50 })
     .withMessage("username must be less than 50 characters"),
   check("email")
-    .exists({checkFalsy: true})
+    .exists({ checkFalsy: true })
     .withMessage("Please provide a value for Email Address")
     .isLength({ max: 50 }),
   check("password")
@@ -44,7 +44,7 @@ const signupValidators = [
       }
       return true;
     }),
-]
+];
 
 const loginValidators = [
   check("email")
@@ -59,57 +59,77 @@ const loginValidators = [
     .withMessage("Password must be less than 50 characters"),
 ];
 
-router.post(
-  "/login",
-  csrfProtection,
-  loginValidators,
-  asyncHandler(async (req, res) => {
-    const { email, password } = req.body;
+router.post("/login", csrfProtection, loginValidators, async (req, res) => {
+  const { email, password } = req.body;
 
-    let errors = [];
+  let errors = [];
 
-    const validateErrors = validationResult(req);
+  const validateErrors = validationResult(req);
 
-    if (validateErrors.isEmpty()) {
-      const user = await db.User.findOne({ where: { email } });
+  if (validateErrors.isEmpty()) {
+    const user = await db.User.findOne({ where: { email } });
 
-      if (user !== null) {
-        const passwordMatch = await bcrypt.compare(
-          password,
-          user.hashPassword.toString()
-        );
-        if (passwordMatch) {
-          loginUser(req, res, user);
-          return res.redirect("./");
-        }
+    if (user !== null) {
+      const passwordMatch = await bcrypt.compare(
+        password,
+        user.hashPassword.toString()
+      );
+      if (passwordMatch) {
+        loginUser(req, res, user);
+        return res.redirect("/");
       }
-
-      errors.push("Login failed for the provided email address and password");
-    } else {
-      errors = validateErrors.array().map((error) => error.msg);
     }
 
-    res.render("user-login", {
-      title: "Login",
-      email,
-      errors,
-      csrfToken: req.csrfToken(),
-    });
-  })
-);
+    errors.push("Login failed for the provided email address and password");
+  } else {
+    errors = validateErrors.array().map((error) => error.msg);
+  }
+
+  res.render("login", {
+    title: "Login",
+    email,
+    errors,
+    csrfToken: req.csrfToken(),
+  });
+});
 
 router.post("/logout", (req, res) => {
   logoutUser(req, res);
   res.redirect("/");
 });
 
-router.get('/users/signup', csrfProtection, (req, res) => {
-  const user = db.User.build();
-  res.render('signup', {
-      title: 'Signup',
-      user,
-      csrfToken: req.csrfToken()
+router.get("/signup", csrfProtection, async (req, res) => {
+  const user = await db.User.build();
+  res.render("signup", {
+    title: "Signup",
+    user,
+    csrfToken: req.csrfToken(),
   });
+});
+
+router.post("/signup", csrfProtection, signupValidators, async (req, res) => {
+  const { username, email, password } = req.body;
+
+  const user = await db.User.build({
+    username,
+    email,
+  });
+  const validatorErrors = validationResult(req);
+
+  if (validatorErrors.isEmpty()) {
+    const hashPassword = await bcrypt.hash(password, 10);
+    user.hashPassword = hashPassword;
+    await user.save();
+    res.redirect("/");
+  } else {
+    const errors = validatorErrors.array().map((error) => error.msg);
+    res.render("signup", {
+      title: "Sign Up",
+      user,
+      errors,
+      csrfToken: req.csrfToken(),
+    });
+  }
 });
 
 module.exports = router;
