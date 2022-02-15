@@ -12,8 +12,6 @@ npx sequelize model:generate --name AlbumLibrary --attributes name:string,userId
 
 npx sequelize model:generate --name LikedAlbum --attributes userId:integer,albumId:integer
 
-
-
 CREATE USER dev_user with password '' CREATEDB;
 
 CREATE DATABASE museharmony_development with OWNER dev_user;
@@ -24,4 +22,4 @@ npx dotenv sequelize-cli db:seed:all
 npx dotenv sequelize-cli db:seed:undo:all
 npx dotenv sequelize-cli db:migrate
 
-random change
+random change.
