@@ -22,4 +22,4 @@ npx dotenv sequelize-cli db:seed:all
 npx dotenv sequelize-cli db:seed:undo:all
 npx dotenv sequelize-cli db:migrate
 
-random change.
+
