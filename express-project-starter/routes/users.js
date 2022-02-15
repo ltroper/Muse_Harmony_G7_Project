@@ -1,4 +1,4 @@
-const { csrfProtection, asyncHandler, csrf } = require("./util");
+const { csrfProtection, asyncHandler } = require("./util");
 const { loginUser, logoutUser } = require("../auth");
 const { check, validationResult } = require("express-validator");
 const db = require("../db/models");
