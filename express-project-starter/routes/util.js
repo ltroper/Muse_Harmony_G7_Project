@@ -1,6 +1,5 @@
-const csrf = require('csurf')
-const csrfProtection = csrf({cookie: true})
-const asyncHandler = require('express-async-handler');
+const csrf = require("csurf");
+const csrfProtection = csrf({ cookie: true });
+const asyncHandler = require("express-async-handler");
 
-
-module.exports = {csrf, csrfProtection, asyncHandler}
+module.exports = { csrf, csrfProtection, asyncHandler };
