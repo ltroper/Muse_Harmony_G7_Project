@@ -6,11 +6,22 @@ append head
   //- add page specific js
   script(src="/javascripts/index.js" type="module" defer)
 
-
-
-body
-  header
-  
-    div.wolf
-      img(src='../references/WOLF-Main.png' alt='Wolf')
-    div.main_container
+  block content
+  body
+    header
+      nav.navbar
+        div.logo
+          img(src='./images/WOLF-Main.png' alt='Logo of Wolf')
+        div
+          button Login
+        div
+          button Create Account
+    main
+      div.main_container
+        div.mainImage
+          img(src='./images/WOLF-Main.png' alt='Main Wolf')
+        div.trendingAlbums
+          a(href="/albums/:id") link to album
+            img(src='./images/WOLF-Main.png' alt='Trending Wolf')
+            p Album title
+            p Artist
