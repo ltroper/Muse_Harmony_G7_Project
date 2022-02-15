@@ -1,8 +1,9 @@
-const {csrfProtection, asyncHandler} = require('./util')
+const {csrfProtection, asyncHandler} = require('./util');
+const { loginUser, logoutUser } = require('../auth');
 const {check, validationResult} = require('express-validator');
 const db = require('../db/models');
 const router = express.Router();
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcryptjs');
 
 
 /* GET users listing. */
@@ -44,7 +45,8 @@ loginValidators, asyncHandler(async (req, res) => {
     if (user !== null){
       const passwordMatch = await bcrypt.compare(password, user.hashPassword.toString());
       if (passwordMatch){
-        return res.redirect('./')
+        loginUser(req, res, user);
+        return res.redirect('./');
       }
     }
 
@@ -61,8 +63,13 @@ loginValidators, asyncHandler(async (req, res) => {
     errors,
     csrfToken: req.csrfToken()
   });
-
-
 }));
+
+router.post('/logout', (req, res) => {
+  logoutUser(req, res);
+  res.redirect('/');
+});
+
+
 
 module.exports = router;
