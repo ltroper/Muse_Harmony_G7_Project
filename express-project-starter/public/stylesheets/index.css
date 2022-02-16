@@ -7,24 +7,31 @@ body {
   margin: 0;
   padding: 0;
   overflow-y: scroll;
+  overflow-x: none;
 }
 
 #app {
   display: block;
-  width: 1080px;
+  width: 1000px;
+  position: absolute;
 }
 
-header {
+/* header {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
   position: absolute;
   margin: 20px 120px;
   justify-content: center;
-}
+} */
 
 main {
   display: flex;
+}
+
+.main_container {
+  display: flex;
+  width: 50%;
 }
 
 .navbar {
@@ -64,6 +71,7 @@ main {
   text-decoration: none;
 }
 
+/* vvv Slides vvv */
 .slideshow-container {
   max-width: 1000px;
   position: relative;
@@ -141,3 +149,4 @@ main {
   from {opacity: .4}
   to {opacity: 1}
 }
+/* ^^^ Slides ^^^ */
