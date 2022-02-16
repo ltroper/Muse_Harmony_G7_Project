@@ -21,7 +21,7 @@ module.exports = {
       },
       releaseDate: {
         allowNull: false,
-        type: Sequelize.DATE,
+        type: Sequelize.STRING(50),
       },
       albumArt: {
         allowNull: false,

@@ -12,6 +12,8 @@ npx sequelize model:generate --name AlbumLibrary --attributes name:string,userId
 
 npx sequelize model:generate --name LikedAlbum --attributes userId:integer,albumId:integer
 
+npx sequelize seed:generate --name artistsSeeds
+
 CREATE USER dev_user with password '' CREATEDB;
 
 CREATE DATABASE museharmony_development with OWNER dev_user;
