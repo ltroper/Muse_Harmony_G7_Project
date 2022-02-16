@@ -135,28 +135,57 @@ router.post("/signup", csrfProtection, signupValidators, asyncHandler(async (req
   }
 }));
 
+
+
+// work on this. REMOVE TRY CATCH.
 router.get("/:id", asyncHandler (async (req, res, next) => {
   const userId = req.params.id;
   const user = await db.User.findOne({
     where: { id: userId },
   });
 
-  // const userLibrary = await db.AlbumLibrary.findAll({
-  //   where: {
-  //     userId
-  //   },
-  //   limit: 10
-  // })
 
-  // const reviewList = await db.Review.findAll({
-  //   where: {userId},
-  //   limit: 10
-  // })
+  const userLibrary = await db.AlbumLibrary.findAll({
+    where: {
+      userId
+    },
+    limit: 10
+  })
+  const reviewList = await db.Review.findAll({
+          where: {userId},
+          limit: 10
+        })
+  //   try{
+  //     const userLibrary = await db.AlbumLibrary.findAll({
+  //       where: {
+  //         userId
+  //       },
+  //       limit: 10
+  //     })
+  //   }catch{
+  //     const userLibrary = 0
+  //   }
+  //   try{
+  //     const reviewList = await db.Review.findAll({
+  //       where: {userId},
+  //       limit: 10
+  //     })
 
-  // const likedAlbums = await db.LikedAlbum.findAll({
-  //   where: {userId},
-  //   include: {Album}
-  // })
+  //   }catch{
+  //     const reviewList= 0
+  //   }
+  //   try{
+  //     const likedAlbums = await db.LikedAlbum.findAll({
+  //       where: {userId},
+  //       include: {Album}
+  //     })
+  //   }catch{
+  //     const likedAlbums = 0
+  //   }
+
+
+
+
 
   res.render("profile")
 }))
