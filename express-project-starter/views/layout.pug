@@ -6,7 +6,9 @@ html
       link(rel='stylesheet' href='/stylesheets/reset.css')
 
 body
-  a(href="/users/logout") Log Out
+  if locals.authenticated
+    form(class='logout' action='/users/logout' method='post')
+      button(type='submit') Logout
   block content
     nav.navbar
       div.museharmony MuseHarmony
