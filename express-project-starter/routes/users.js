@@ -144,7 +144,6 @@ router.get("/:id", asyncHandler (async (req, res, next) => {
     where: { id: userId },
   });
 
-
   const userLibrary = await db.AlbumLibrary.findAll({
     where: {
       userId
@@ -152,40 +151,15 @@ router.get("/:id", asyncHandler (async (req, res, next) => {
     limit: 10
   })
   const reviewList = await db.Review.findAll({
-          where: {userId},
-          limit: 10
-        })
-  //   try{
-  //     const userLibrary = await db.AlbumLibrary.findAll({
-  //       where: {
-  //         userId
-  //       },
-  //       limit: 10
-  //     })
-  //   }catch{
-  //     const userLibrary = 0
-  //   }
-  //   try{
-  //     const reviewList = await db.Review.findAll({
-  //       where: {userId},
-  //       limit: 10
-  //     })
+    where: {userId},
+      limit: 10
+  })
 
-  //   }catch{
-  //     const reviewList= 0
-  //   }
-  //   try{
-  //     const likedAlbums = await db.LikedAlbum.findAll({
-  //       where: {userId},
-  //       include: {Album}
-  //     })
-  //   }catch{
-  //     const likedAlbums = 0
-  //   }
+  const likedAlbums = await db.LikedAlbum.findAll({
+    where: {userId},
+    include: {Album}
 
-
-
-
+  })
 
   res.render("profile")
 }))
