@@ -59,7 +59,7 @@ const loginValidators = [
     .withMessage("Password must be less than 50 characters"),
 ];
 
-router.post("/login", csrfProtection, loginValidators, async (req, res) => {
+router.post("/login", csrfProtection, loginValidators, asyncHandler (async (req, res) => {
   const { email, password } = req.body;
 
   let errors = [];
@@ -76,7 +76,8 @@ router.post("/login", csrfProtection, loginValidators, async (req, res) => {
       );
       if (passwordMatch) {
         loginUser(req, res, user);
-        return res.redirect("/");
+        const userId = user.id;
+        return res.redirect(`/users/${userId}`);
       }
     }
 
@@ -91,7 +92,7 @@ router.post("/login", csrfProtection, loginValidators, async (req, res) => {
     errors,
     csrfToken: req.csrfToken(),
   });
-});
+}));
 
 
 
@@ -100,16 +101,16 @@ router.post("/logout", (req, res) => {
   res.redirect("/");
 });
 
-router.get("/signup", csrfProtection, async (req, res) => {
+router.get("/signup", csrfProtection, asyncHandler (async (req, res) => {
   const user = await db.User.build();
   res.render("signup", {
     title: "Signup",
     user,
     csrfToken: req.csrfToken(),
   });
-});
+}));
 
-router.post("/signup", csrfProtection, signupValidators, async (req, res) => {
+router.post("/signup", csrfProtection, signupValidators, asyncHandler(async (req, res) => {
   const { username, email, password } = req.body;
 
   const user = await db.User.build({
@@ -132,6 +133,61 @@ router.post("/signup", csrfProtection, signupValidators, async (req, res) => {
       csrfToken: req.csrfToken(),
     });
   }
-});
+}));
+
+
+
+// work on this. REMOVE TRY CATCH.
+router.get("/:id", asyncHandler (async (req, res, next) => {
+  const userId = req.params.id;
+  const user = await db.User.findOne({
+    where: { id: userId },
+  });
+
+
+  const userLibrary = await db.AlbumLibrary.findAll({
+    where: {
+      userId
+    },
+    limit: 10
+  })
+  const reviewList = await db.Review.findAll({
+          where: {userId},
+          limit: 10
+        })
+  //   try{
+  //     const userLibrary = await db.AlbumLibrary.findAll({
+  //       where: {
+  //         userId
+  //       },
+  //       limit: 10
+  //     })
+  //   }catch{
+  //     const userLibrary = 0
+  //   }
+  //   try{
+  //     const reviewList = await db.Review.findAll({
+  //       where: {userId},
+  //       limit: 10
+  //     })
+
+  //   }catch{
+  //     const reviewList= 0
+  //   }
+  //   try{
+  //     const likedAlbums = await db.LikedAlbum.findAll({
+  //       where: {userId},
+  //       include: {Album}
+  //     })
+  //   }catch{
+  //     const likedAlbums = 0
+  //   }
+
+
+
+
+
+  res.render("profile")
+}))
 
 module.exports = router;
