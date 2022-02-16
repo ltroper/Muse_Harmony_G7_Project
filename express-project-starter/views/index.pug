@@ -20,9 +20,33 @@ append head
       main
         div.main_container
           div.mainImage
-            img(src='./images/WOLF-Main.png' alt='Main Wolf' width=300 height=300)
+            img(src='#' alt='Main Wolf' width=300 height=300)
           div.trendingAlbums
             a(href="/albums/:id") link to album
-              img(src='./images/WOLF-Main.png' alt='Trending Wolf' width=300 height=300)
+              img(src='#' alt='Trending Wolf' width=300 height=300)
               p Album title
               p Artist
+        // Slideshow container
+        .slideshow-container
+          // Full-width images with number and caption text
+          .mySlides.fade
+            .numbertext 1 / 3
+            img(src='#' style='width:100%')
+            .text Caption Text
+          .mySlides.fade
+            .numbertext 2 / 3
+            img(src='#' style='width:100%')
+            .text Caption Two
+          .mySlides.fade
+            .numbertext 3 / 3
+            img(src='#' style='width:100%')
+            .text Caption Three
+          // Next and previous buttons
+          a.prev(onclick='plusSlides(-1)') &#x276E;
+          a.next(onclick='plusSlides(1)') &#x276F;
+        br
+        // The dots/circles
+        div(style='text-align:center')
+          span.dot(onclick='currentSlide(1)')
+          span.dot(onclick='currentSlide(2)')
+          span.dot(onclick='currentSlide(3)')
