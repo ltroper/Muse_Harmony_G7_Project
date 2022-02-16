@@ -1,6 +1,6 @@
 extends layout.pug
 
-block header
+block content
     div.hidden.login-form
         form(action="/users/login" method="POST")
             input(type="hidden" name="_csrf" value=csrfToken)
