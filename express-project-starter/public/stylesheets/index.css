@@ -1,3 +1,65 @@
-h1 {
-    color: #555555;
+* {
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-y: scroll;
+}
+
+#app {
+  display: block;
+  width: 1080px;
+}
+
+header {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  position: absolute;
+  margin: 20px 120px;
+  justify-content: center;
+}
+
+main {
+  display: flex;
+}
+
+.navbar {
+  display: flex;
+  margin: 0;
+  justify-content: flex-end;
+  text-align: center;
+}
+
+.navbar a {
+  position: static;
+  padding: 10px 10px;
+}
+
+.navbar.logo {
+  justify-content: flex-end;
+}
+
+.login-button a {
+  background-color: grey;
+  border-radius: 5px;
+  color: black;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 10px;
+}
+
+.login-button a:hover {
+  border-radius: 5px;
+  /* background-color: yellow; */
+  background-image: radial-gradient(white, black);
+}
+
+.create-account a {
+  text-decoration: none;
 }

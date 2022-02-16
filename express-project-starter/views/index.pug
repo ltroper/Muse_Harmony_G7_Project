@@ -8,20 +8,21 @@ append head
 
   block content
   body
-    header
+    div#app
+      header
+      div.logo
+        img(src='./images/WOLF-Main.png' alt='Logo of Wolf' width=60 height=60)
       nav.navbar
-        div.logo
-          img(src='./images/WOLF-Main.png' alt='Logo of Wolf')
-        div
-          button Login
-        div
-          button Create Account
-    main
-      div.main_container
-        div.mainImage
-          img(src='./images/WOLF-Main.png' alt='Main Wolf')
-        div.trendingAlbums
-          a(href="/albums/:id") link to album
-            img(src='./images/WOLF-Main.png' alt='Trending Wolf')
-            p Album title
-            p Artist
+        div.login-button
+          a(href='/users/login') Login
+        div.create-account
+          a(href='/users/signup') Create Account
+      main
+        div.main_container
+          div.mainImage
+            img(src='./images/WOLF-Main.png' alt='Main Wolf' width=300 height=300)
+          div.trendingAlbums
+            a(href="/albums/:id") link to album
+              img(src='./images/WOLF-Main.png' alt='Trending Wolf' width=300 height=300)
+              p Album title
+              p Artist
