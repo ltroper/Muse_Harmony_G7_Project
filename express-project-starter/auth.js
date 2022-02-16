@@ -7,7 +7,8 @@ const loginUser = (req, res, user) => {
 };
 
 const logoutUser = (req, res, user) => {
-  delete req.session.auth;
+  req.session.destroy();
+  res.clearCookie("museharmony.sid");
 };
 
 const requireAuth = (req, res, next) => {

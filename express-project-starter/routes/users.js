@@ -96,9 +96,8 @@ router.post("/login", csrfProtection, loginValidators, async (req, res) => {
 
 
 
-router.get("/logout", (req, res) => {
-  delete req.session.user
-  // logoutUser(req, res);
+router.post("/logout", (req, res) => {
+  logoutUser(req, res);
   res.redirect("/");
 });
 
