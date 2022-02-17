@@ -143,49 +143,26 @@ router.get("/:id", asyncHandler (async (req, res, next) => {
   const user = await db.User.findOne({
     where: { id: userId },
   });
+  const likedAlbums = await db.User.findAll({
+        where: {id: userId},
+        include: {
+          model: db.Album,
+          as: 'LikedAlbums'
+        }
+      })
 
+      console.log(likedAlbums[0].LikedAlbums);
 
-  const userLibrary = await db.AlbumLibrary.findAll({
-    where: {
-      userId
-    },
-    limit: 10
-  })
-  const reviewList = await db.Review.findAll({
-          where: {userId},
-          limit: 10
-        })
-  //   try{
-  //     const userLibrary = await db.AlbumLibrary.findAll({
-  //       where: {
-  //         userId
-  //       },
-  //       limit: 10
-  //     })
-  //   }catch{
-  //     const userLibrary = 0
-  //   }
-  //   try{
-  //     const reviewList = await db.Review.findAll({
-  //       where: {userId},
-  //       limit: 10
-  //     })
-
-  //   }catch{
-  //     const reviewList= 0
-  //   }
-  //   try{
-  //     const likedAlbums = await db.LikedAlbum.findAll({
-  //       where: {userId},
-  //       include: {Album}
-  //     })
-  //   }catch{
-  //     const likedAlbums = 0
-  //   }
-
-
-
-
+  // const userLibrary = await db.AlbumLibrary.findAll({
+  //   where: {
+  //     userId
+  //   },
+  //   limit: 10
+  // })
+  // const reviewList = await db.Review.findAll({
+  //   where: {userId},
+  //   limit: 10
+  // })
 
   res.render("profile")
 }))
