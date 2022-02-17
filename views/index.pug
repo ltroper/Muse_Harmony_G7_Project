@@ -39,13 +39,13 @@ block content
       .navbar
           .logo
             img(src='./images/WOLF-Main.png' alt='Logo of Wolf' width=60 height=60)
-          button.login-button.modal-show(onclick="document.getElementById('modal').style.display='block'") Login
-          div.modal-container#modal
+          button.login-button.modal-show(onclick="document.getElementById('modal-login').style.display='block'") Login
+          div.modal-container#modal-login
             form.modal-form(action="/users/login" method="POST")
-              span.close-btn(onclick="document.getElementById('modal').style.display='none'")
+              span.close-btn(onclick="document.getElementById('modal-login').style.display='none'")
                 i(class="fa-solid fa-rectangle-xmark")
               div.modal-img
-                img.wolf-img(src='./images/WOLF-Main.png' alt='Logo of Wolf')
+                img.logo-img(src='./images/muse.png' alt='Logo of Muse')
               div.modal-inputs
                 input(type="hidden" name="_csrf" value=csrfToken)
                 label(for="email") Email
@@ -54,14 +54,13 @@ block content
                 input(type="password" name="password" required)
               div.modal-btn
                 button.submit-btn Submit
-                button.cancel-btn Cancel
           button.create-account.modal-show(onclick="document.getElementById('modal').style.display='block'") Create account
           div.modal-container#modal
             form.modal-form(action="/users/signup" method="POST")
               span.close-btn(onclick="document.getElementById('modal').style.display='none'")
                 i(class="fa-solid fa-rectangle-xmark")
               div.modal-img
-                img.wolf-img(src='./images/WOLF-Main.png' alt='Logo of Wolf')
+                img.logo-img(src='./images/muse.png' alt='Logo of Muse')
               div.modal-inputs
                 input(type="hidden" name="_csrf" value=csrfToken)
                 label(for="username") Username
@@ -74,7 +73,6 @@ block content
                 input(type="password" name="confirmPassword" required)
               div.modal-btn
                 button.submit-btn Submit
-                button.cancel-btn Cancel
   body
     div#app
       div.main-container

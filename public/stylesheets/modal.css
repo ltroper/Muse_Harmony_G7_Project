@@ -1,7 +1,7 @@
-body {
+/* body {
   width: 600px;
   margin: 0 auto;
-}
+} */
 
 form {
   border: 3px solid #727272;
@@ -44,7 +44,7 @@ form {
 }
 
 /*assign full width inputs*/
-input[type="username"],
+input[type="text"],
 input[type="email"],
 input[type="password"] {
   width: 100%;
@@ -83,8 +83,9 @@ input[type="password"] {
 }
 
 .close-btn {
-  position: relative;
-  left: 550px;
+  position: fixed;
+  transform: translate(730%, 7%);
+  float: right;
   color: #000;
   font-size: 35px;
   font-weight: bold;
@@ -102,7 +103,8 @@ input[type="password"] {
 }
 /*set image properties*/
 
-img.wolf-img {
+img.logo-img {
+  position: relative;
   width: 40%;
   border-radius: 50%;
 }
