@@ -8,12 +8,32 @@ module.exports = {
 
       Example:
       */
-   return queryInterface.bulkInsert('LikedAlbums', [{
-     userId: 4,
-     albumId: 2,
+   return queryInterface.bulkInsert('LikedAlbums', [
+    {
+     userId: 1,
+     albumId: 1,
      createdAt: new Date(),
      updatedAt: new Date()
-   }], {});
+    },
+    {
+      userId: 2,
+      albumId: 2,
+      createdAt: new Date(),
+      updatedAt: new Date()
+     },
+     {
+      userId: 3,
+      albumId: 3,
+      createdAt: new Date(),
+      updatedAt: new Date()
+     },
+     {
+      userId: 4,
+      albumId: 4,
+      createdAt: new Date(),
+      updatedAt: new Date()
+     }
+  ], {});
   },
 
   down: (queryInterface, Sequelize) => {

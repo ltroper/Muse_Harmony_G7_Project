@@ -34,11 +34,11 @@ module.exports = (sequelize, DataTypes) => {
       otherKey: "userId",
     });
 
-    // Album.belongsToMany(models.User, {
-    //   through: "albumLibrary",
-    //   foreignKey: "albumId",
-    //   otherKey: "userId",
-    // });
+    Album.belongsToMany(models.User, {
+      through: "AlbumLibrary",
+      foreignKey: "albumId",
+      otherKey: "userId",
+    });
 
     Album.belongsToMany(models.User, {
       through: "Review",

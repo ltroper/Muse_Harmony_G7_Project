@@ -33,11 +33,13 @@ module.exports = (sequelize, DataTypes) => {
       as: 'LikedAlbums'
     })
 
-    // User.belongsToMany(models.Album, {
-    //   through: 'albumLibrary',
-    //   foreignKey: 'userId',
-    //   otherKey: 'albumId'
-    // })
+    User.belongsToMany(models.Album, {
+      through: 'AlbumLibrary',
+      foreignKey: 'userId',
+      otherKey: 'albumId',
+      as: 'AlbumLibraries'
+    })
+
     User.belongsToMany(models.Album, {
       through: 'Review',
       foreignKey: 'userId',
