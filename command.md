@@ -25,5 +25,3 @@ npx dotenv sequelize-cli db:seed:undo:all && npx dotenv sequelize-cli db:migrate
 
 
 
-
-npx sequelize seed:generate --name likedAlbums
