@@ -15,12 +15,6 @@ module.exports = {
      createdAt: new Date(),
      updatedAt: new Date()
     },
-    {
-      userId: 2,
-      albumId: 2,
-      createdAt: new Date(),
-      updatedAt: new Date()
-     },
      {
       userId: 3,
       albumId: 3,
@@ -30,6 +24,12 @@ module.exports = {
      {
       userId: 4,
       albumId: 4,
+      createdAt: new Date(),
+      updatedAt: new Date()
+     },
+     {
+      userId: 4,
+      albumId: 1,
       createdAt: new Date(),
       updatedAt: new Date()
      }

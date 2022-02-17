@@ -151,19 +151,30 @@ router.get("/:id", asyncHandler (async (req, res, next) => {
         }
       })
 
-      console.log(likedAlbums[0].LikedAlbums);
+      //to key into the albums
+      // console.log(likedAlbums[0].LikedAlbums);
 
-  // const userLibrary = await db.AlbumLibrary.findAll({
-  //   where: {
-  //     userId
-  //   },
-  //   limit: 10
-  // })
-  // const reviewList = await db.Review.findAll({
-  //   where: {userId},
-  //   limit: 10
-  // })
+  const userLibrary = await db.User.findAll({
+    where: {id: userId},
+    include: {
+      model: db.Album,
+      as: 'AlbumLibraries'
+    },
+    limit: 10
+  })
+  // to key into album libraries
+  // console.log(userLibrary[0].AlbumLibraries);
 
+  const reviewList = await db.User.findAll({
+    where: {id: userId},
+    include: {
+      model: db.Album,
+      as: 'Reviews'
+    },
+    limit: 10
+  })
+  //To key into the review content
+  // console.log(reviewList[0].Reviews[0].Review.content);
   res.render("profile")
 }))
 

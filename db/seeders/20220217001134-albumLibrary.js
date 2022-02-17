@@ -16,23 +16,23 @@ module.exports = {
      createdAt: new Date(),
      updatedAt: new Date()
     },
-    {
-      userId: 2,
-      albumId: 2,
-      name: 'test library2',
-      createdAt: new Date(),
-      updatedAt: new Date()
-     },
      {
       userId: 3,
       albumId: 3,
-      name: 'test library3',
+      name: 'test library2',
       createdAt: new Date(),
       updatedAt: new Date()
      },
      {
       userId: 4,
       albumId: 4,
+      name: 'test library3',
+      createdAt: new Date(),
+      updatedAt: new Date()
+     },
+     {
+      userId: 4,
+      albumId: 1,
       name: 'test library4',
       createdAt: new Date(),
       updatedAt: new Date()

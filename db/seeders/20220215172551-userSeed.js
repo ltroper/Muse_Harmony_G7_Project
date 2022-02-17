@@ -15,8 +15,7 @@ module.exports = {
         {
           username: "DemoUser1",
           email: "demouser1@demouser.com",
-          hashPassword:
-            "",
+          hashPassword:"$2a$10$4I8LFMjdt6gQxN1ZRCYXJu7diSNa6AEUZD3YmhypAttkeM1QhWHRK",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -24,7 +23,7 @@ module.exports = {
           username: "DemoUser2",
           email: "demouser2@demouser.com",
           hashPassword:
-            "",
+            "$2a$10$jsDg3qghpz75kWRIgABBd.YizlXUSrR1Qkj1TnDuYZ1gkn7PZZLmW",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -32,7 +31,7 @@ module.exports = {
           username: "DemoUser3",
           email: "demouser3@demouser.com",
           hashPassword:
-            "",
+            "$2a$10$y3xkKcukwxg1rlWaPTk8t.D/WTweDuK8o/y6sibtVhIjbr7TUdAtu",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -40,7 +39,7 @@ module.exports = {
           username: "DemoUser4",
           email: "demouser4@demouser.com",
           hashPassword:
-            "",
+            "$2a$10$NUCo4rhzpnq3Pgg23OCPietu4nysCsjwJbaa8XD8YzrY9.IoB0wVy",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
