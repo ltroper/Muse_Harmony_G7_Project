@@ -17,6 +17,12 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         type: DataTypes.STRING.BINARY,
       },
+      profilePicture: {
+        type: DataTypes.TEXT,
+      },
+      biography: {
+        type: DataTypes.TEXT,
+      },
     },
     {}
   );

@@ -1,7 +1,12 @@
 extends layout.pug
 
 block content
-    h2 TEST PROFILE
+    h2= user.username
+    img(src=`${user.profilePicture}`)
+    p= user.biography
+    if locals.userId == user.id
+        form(class='editProfile' action='/users/editProfile' method='post')
+            button(type='submit') Edit Profile
     table
         thead
             tr
@@ -24,7 +29,6 @@ block content
             tr
                 th(scope='col') Album Libraries
         tbody
-            each library in array
+            each library in libraryNames
                 tr
                     td= library
-            
