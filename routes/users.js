@@ -149,54 +149,68 @@ router.post(
 );
 
 // work on this. REMOVE TRY CATCH.
-router.get(
-  "/:id",
-  asyncHandler(async (req, res, next) => {
-    const userId = req.params.id;
-    const user = await db.User.findOne({
-      where: { id: userId },
-    });
 
-    const userLibrary = await db.AlbumLibrary.findAll({
-      where: {
-        userId,
-      },
-      limit: 10,
-    });
-    const reviewList = await db.Review.findAll({
-      where: { userId },
-      limit: 10,
-    });
-    //   try{
-    //     const userLibrary = await db.AlbumLibrary.findAll({
-    //       where: {
-    //         userId
-    //       },
-    //       limit: 10
-    //     })
-    //   }catch{
-    //     const userLibrary = 0
-    //   }
-    //   try{
-    //     const reviewList = await db.Review.findAll({
-    //       where: {userId},
-    //       limit: 10
-    //     })
+router.get("/:id", asyncHandler (async (req, res, next) => {
+  const userId = req.params.id;
+  const user = await db.User.findOne({
+    where: { id: userId },
+  });
 
-    //   }catch{
-    //     const reviewList= 0
-    //   }
-    //   try{
-    //     const likedAlbums = await db.LikedAlbum.findAll({
-    //       where: {userId},
-    //       include: {Album}
-    //     })
-    //   }catch{
-    //     const likedAlbums = 0
-    //   }
+  //query to return an array of albums the user liked
+  const likedAlbums = await db.User.findAll({
+        where: {id: userId},
+        include: {
+          model: db.Album,
+          as: 'LikedAlbums'
+        }
+      })
 
-    res.render("profile");
+  //passing into pug
+  const albums = likedAlbums[0].LikedAlbums
+
+  //query to grab the array of albums with libraries
+  const userLibrary = await db.User.findAll({
+    where: {id: userId},
+    include: {
+      model: db.Album,
+      as: 'AlbumLibraries'
+    },
+    limit: 10
   })
-);
+
+  //creates an array of library names
+    const albumsOfLibrary = userLibrary[0].AlbumLibraries
+    const names = new Set();
+    let libraryNames = []
+    for (let i = 0; i < albumsOfLibrary.length; i++){
+      names.add(albumsOfLibrary[i].dataValues.AlbumLibrary.dataValues.name)
+    }
+    // console.log(names)
+    for (let item of names){
+      libraryNames.push(item)
+    }
+
+  // Creates an array of albums with reviews
+  const reviewList = await db.User.findAll({
+    where: {id: userId},
+    include: {
+      model: db.Album,
+      as: 'Reviews'
+    },
+    limit: 10
+  })
+  const reviews = reviewList[0].Reviews
+
+  // const loggedIn = req.session.auth
+  // // if(loggedIn.userId == userId){
+  //   const editProfile = true;
+  //   res.render("profile", {user, albums, reviews, libraryNames, editProfile})
+  // // } else{
+    // const editProfile = false;
+    res.render("profile", {user, albums, reviews, libraryNames})
+// }
+
+}))
+
 
 module.exports = router;

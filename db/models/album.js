@@ -12,29 +12,43 @@ module.exports = (sequelize, DataTypes) => {
   );
   Album.associate = function (models) {
     // associations can be defined here
-    Album.belongsTo(models.Artist, {
-      foreignKey: "artistId",
-    });
+    // Album.belongsTo(models.Artist, {
+    //   foreignKey: "artistId",
+    // });
 
-    Album.hasMany(models.Song, {
-      foreignKey: "albumId",
-    });
+    // Album.hasMany(models.Song, {
+    //   foreignKey: "albumId",
+    // });
 
-    Album.hasMany(models.Review, {
-      foreignKey: "albumId",
-    });
+    // Album.hasMany(models.Review, {
+    //   foreignKey: "albumId",
+    // });
+
+    // Album.hasMany(models.Review, {
+    //   foreignKey: "albumId",
+    // });
+    // Album.belongsTo(models.AlbumLibrary, {
+    //   foreignKey: "albumId"
+    // })
 
     Album.belongsToMany(models.User, {
-      through: "likedAlbum",
+      through: "LikedAlbum",
       foreignKey: "albumId",
       otherKey: "userId",
     });
 
     Album.belongsToMany(models.User, {
-      through: "albumLibrary",
+      through: "AlbumLibrary",
       foreignKey: "albumId",
       otherKey: "userId",
     });
+
+    Album.belongsToMany(models.User, {
+      through: "Review",
+      foreignKey: "albumId",
+      otherKey: "userId",
+    })
+
   };
   return Album;
 };

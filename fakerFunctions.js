@@ -1,5 +1,9 @@
 const { faker } = require("@faker-js/faker");
 
+const manyHashes = () => {
+  const hashedPassword = bcrypt.hashSync(faker.internet.password()),
+}
+
 const functionMultiplier = () => {
   let artists = [];
   let albums = [];
