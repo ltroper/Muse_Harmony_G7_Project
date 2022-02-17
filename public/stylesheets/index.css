@@ -26,12 +26,8 @@ nav {
 }
 
 .login-button {
-  float: right;
-}
-
-.login-button a {
   border-radius: 5px;
-  color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
   margin: 10px;
   padding: 10px 20px;
   text-align: center;
@@ -40,9 +36,10 @@ nav {
   font-size: 10px;
 }
 
-.create-account a {
+.create-account-button {
+  background-color: rgb(60, 128, 255);
   border-radius: 5px;
-  color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
   margin: 10px;
   padding: 10px 20px;
   text-align: center;
