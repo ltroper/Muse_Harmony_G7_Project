@@ -4,41 +4,14 @@ append head
   //- add page specific styles by appending to the head
   link(rel="stylesheet" href="/stylesheets/index.css")
   //- add page specific js
-  script(src="/javascripts/index.js" type="module" defer)
-  script.
-    let slideIndex = 1;
-      showSlides(slideIndex);
-    function plusSlides(n) {
-      showSlides((slideIndex += n));
-    }
-    function currentSlide(n) {
-      showSlides((slideIndex = n));
-    }
-    function showSlides(n) {
-    let i;
-    let slides = document.getElementsByClassName("mySlides");
-    let dots = document.getElementsByClassName("dot");
-    if (n > slides.length) {
-      slideIndex = 1;
-    }
-    if (n < 1) {
-      slideIndex = slides.length;
-    }
-    for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";
-    }
-    for (i = 0; i < dots.length; i++) {
-      dots[i].className = dots[i].className.replace("active", "");
-    }
-    slides[slideIndex - 1].style.display = "block";
-    dots[slideIndex - 1].className += "active";
-    }
+  script(src="./javascripts/index.js" type="module")
+
 block content
   head
     nav
       .navbar
           .logo
-            img(src='./images/WOLF-Main.png' alt='Logo of Wolf' width=60 height=60)
+            img(src='./images/muse.png' alt='Logo of Muse' width=60 height=60)
           button.login-button.modal-show(onclick="document.getElementById('modal-login').style.display='block'") Login
           div.modal-container#modal-login
             form.modal-form(action="/users/login" method="POST")
@@ -87,8 +60,10 @@ block content
             img(src='/images/banner3.jpg' style='width:100%')
             .text Caption Three
           // Next and previous buttons
-          a.prev(onclick='plusSlides(-1)') &#x276E;
-          a.next(onclick='plusSlides(1)') &#x276F;
+          a.prev &#x276E;
+          a.next &#x276F;
+        .middleContainer
+          p
         .albums-container
           .albumList-container1
             a(href="/albums/:id")
