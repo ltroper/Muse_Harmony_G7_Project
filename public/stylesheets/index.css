@@ -12,17 +12,14 @@ body {
 
 #app {
   display: block;
-  /* width: 1000px; */
-  position: absolute;
+
 }
 
 header {
     width: 100%;
     display: flex;
-    flex-wrap: wrap;
     position: absolute;
     margin: 20px 120px;
-    justify-content: center;
   }
 
 header {
@@ -30,7 +27,8 @@ header {
 }
 
 main {
-  display: flex;
+  padding: 0 30px;
+  width: 1180px;
 }
 
 .main-container {
@@ -68,7 +66,6 @@ main {
 
 .login-button a:hover {
   border-radius: 5px;
-  /* background-color: yellow; */
   background-image: radial-gradient(white, black);
 }
 
@@ -87,7 +84,6 @@ main {
 
 /* vvv Slides vvv */
 .slideshow-container {
-  max-width: 1000px;
   position: relative;
   margin: auto;
 }
