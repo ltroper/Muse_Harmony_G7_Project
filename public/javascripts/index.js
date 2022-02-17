@@ -3,7 +3,7 @@ window.addEventListener("load", (event) => {
 
   /* Slideshow */
 
-  const slideIndex = 1;
+  let slideIndex = 1;
   showSlides(slideIndex);
 
   function plusSlides(n) {

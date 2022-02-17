@@ -12,18 +12,18 @@ body {
 
 #app {
   display: block;
-  width: 1000px;
+  /* width: 1000px; */
   position: absolute;
 }
 
-/* header {
+header {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     position: absolute;
     margin: 20px 120px;
     justify-content: center;
-  } */
+  }
 
 header {
   display: flex;
@@ -31,12 +31,11 @@ header {
 
 main {
   display: flex;
-  flex-direction: row;
 }
 
-.main_container {
+.main-container {
   display: flex;
-  width: 50%;
+  justify-content: center;
 }
 
 .navbar {
@@ -53,7 +52,7 @@ main {
 }
 
 .navbar.logo {
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
 
 .login-button a {
@@ -75,6 +74,15 @@ main {
 
 .create-account a {
   text-decoration: none;
+}
+
+.albums-container {
+  display: flex;
+
+}
+
+.albumList {
+  display: flex;
 }
 
 /* vvv Slides vvv */
@@ -166,4 +174,4 @@ main {
     opacity: 1;
   }
 }
-/* ^^^ Slides ^^^ */
+/* ^^^ Slides ^^^

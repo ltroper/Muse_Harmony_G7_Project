@@ -5,31 +5,49 @@ append head
   link(rel="stylesheet" href="/stylesheets/index.css")
   //- add page specific js
   script(src="/javascripts/index.js" type="module" defer)
-
-
+  script.
+    let slideIndex = 1;
+      showSlides(slideIndex);
+    function plusSlides(n) {
+      showSlides((slideIndex += n));
+    }
+    function currentSlide(n) {
+      showSlides((slideIndex = n));
+    }
+    function showSlides(n) {
+    let i;
+    let slides = document.getElementsByClassName("mySlides");
+    let dots = document.getElementsByClassName("dot");
+    if (n > slides.length) {
+      slideIndex = 1;
+    }
+    if (n < 1) {
+      slideIndex = slides.length;
+    }
+    for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+    }
+    for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace("active", "");
+    }
+    slides[slideIndex - 1].style.display = "block";
+    dots[slideIndex - 1].className += "active";
+    }
+block content
   body
-    block content
-      div#app
-        header
+    div#app
+      header
         div.logo
           img(src='./images/WOLF-Main.png' alt='Logo of Wolf' width=60 height=60)
-        nav.navbar
-          div.login-button
-            a(href='/users/login') Login
-          div.create-account
-            a(href='/users/signup') Create Account
-        main
-          div.main_container
-            div.mainImage
-              img(src='#' alt='Main Wolf' width=300 height=300)
-            div.trendingAlbums
-              a(href="/albums/:id") link to album
-                img(src='#' alt='Trending Wolf' width=300 height=300)
-                p Album title
-                p Artist
-          // Slideshow container
+        nav
+          nav.navbar
+            div.login-button
+              a(href='/users/login') Login
+            div.create-account
+              a(href='/users/signup') Create Account
+      main
+        div.main-container
           .slideshow-container
-            // Full-width images with number and caption text
             .mySlides.fade
               img(src='/images/banner1.jpg' style='width:100%')
               .text Caption Text
@@ -37,15 +55,20 @@ append head
               img(src='/images/banner2.jpg' style='width:100%')
               .text Caption Two
             .mySlides.fade
-
               img(src='/images/banner3.jpg' style='width:100%')
               .text Caption Three
             // Next and previous buttons
             a.prev(onclick='plusSlides(-1)') &#x276E;
             a.next(onclick='plusSlides(1)') &#x276F;
-          br
-          // The dots/circles
-          div(style='text-align:center')
-            span.dot(onclick='currentSlide(1)')
-            span.dot(onclick='currentSlide(2)')
-            span.dot(onclick='currentSlide(3)')
+          .albums-container
+            .albumList-container1
+              //- table
+              //-   tr
+              //-     th Album
+              //-   each album in albums
+              //-     tr
+              //-       td=album.album
+              a(href="/albums/:id")
+                img(src='#' alt='album-cover' width=300 height=300)
+                p Album title
+                p Artist
