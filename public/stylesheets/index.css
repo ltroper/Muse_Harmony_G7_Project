@@ -5,7 +5,8 @@
 
 nav {
   display: block;
-
+  position: absolute;
+  z-index: 30;
 }
 
 .navbar {
@@ -16,10 +17,22 @@ nav {
   text-align: center;
 }
 
+.logo {
+  flex: 1;
+}
+
+.logo img {
+  float: left;
+}
+
+.login-button {
+  float: right;
+}
+
 .login-button a {
-  background-color: grey;
   border-radius: 5px;
-  color: black;
+  color: rgb(255, 255, 255);
+  margin: 10px;
   padding: 10px 20px;
   text-align: center;
   text-decoration: none;
@@ -27,13 +40,15 @@ nav {
   font-size: 10px;
 }
 
-.login-button a:hover {
-  border-radius: 5px;
-  background-image: radial-gradient(white, black);
-}
-
 .create-account a {
+  border-radius: 5px;
+  color: rgb(255, 255, 255);
+  margin: 10px;
+  padding: 10px 20px;
+  text-align: center;
   text-decoration: none;
+  display: inline-block;
+  font-size: 10px;
 }
 
 .logo a {
@@ -51,7 +66,7 @@ body {
 
 #app {
   display: block;
-  margin: 0px;
+  z-index: 0;
 }
 
 .main-container {
@@ -74,7 +89,6 @@ body {
 /* vvv Slides vvv */
 .slideshow-container {
   position: relative;
-  margin: auto;
 }
 
 .mySlides {
