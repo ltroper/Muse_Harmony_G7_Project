@@ -1,7 +1,7 @@
-body {
+/* body {
   width: 600px;
   margin: 0 auto;
-}
+} */
 
 form {
   border: 3px solid #727272;
@@ -32,18 +32,19 @@ form {
   width: auto;
 }
 /*style the model content box*/
-.modal-inputs {
+.modal-login-inputs {
   background-color: #fefefe;
   margin: 5% auto 15% auto;
   border: 1px solid #888;
   width: 80%;
 }
 
-.modal-inputs {
+.modal--create-account-inputs {
   padding: 16px;
 }
 
 /*assign full width inputs*/
+input[type="text"],
 input[type="email"],
 input[type="password"] {
   width: 100%;
@@ -53,7 +54,8 @@ input[type="password"] {
   border: 1px solid #ccc;
   box-sizing: border-box;
 }
-button {
+
+/* button {
   background-color: #4282ca;
   color: white;
   padding: 14px 20px;
@@ -61,13 +63,18 @@ button {
   border: none;
   cursor: pointer;
   width: 100%;
-}
+} */
+
 /* set a hover effect for the button*/
 
-button:hover {
+/* button:hover {
   opacity: 0.8;
-}
+} */
 /*set extra style for the cancel button*/
+
+.submit-btn {
+  width: auto;
+}
 
 .cancel-btn {
   width: auto;
@@ -76,8 +83,9 @@ button:hover {
 }
 
 .close-btn {
-  position: relative;
-  left: 550px;
+  position: fixed;
+  transform: translate(730%, 7%);
+  float: right;
   color: #000;
   font-size: 35px;
   font-weight: bold;
@@ -95,7 +103,8 @@ button:hover {
 }
 /*set image properties*/
 
-img.wolf-img {
+img.logo-img {
+  position: relative;
   width: 40%;
   border-radius: 50%;
 }

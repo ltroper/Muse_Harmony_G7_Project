@@ -59,85 +59,97 @@ const loginValidators = [
     .withMessage("Password must be less than 50 characters"),
 ];
 
-router.post("/login", csrfProtection, loginValidators, asyncHandler (async (req, res) => {
-  const { email, password } = req.body;
+router.post(
+  "/login",
+  csrfProtection,
+  loginValidators,
+  asyncHandler(async (req, res) => {
+    const { email, password } = req.body;
 
-  let errors = [];
+    let errors = [];
 
-  const validateErrors = validationResult(req);
+    const validateErrors = validationResult(req);
 
-  if (validateErrors.isEmpty()) {
-    const user = await db.User.findOne({ where: { email } });
+    if (validateErrors.isEmpty()) {
+      const user = await db.User.findOne({ where: { email } });
 
-    if (user !== null) {
-      const passwordMatch = await bcrypt.compare(
-        password,
-        user.hashPassword.toString()
-      );
-      if (passwordMatch) {
-        loginUser(req, res, user);
-        const userId = user.id;
-        return res.redirect(`/users/${userId}`);
+      if (user !== null) {
+        const passwordMatch = await bcrypt.compare(
+          password,
+          user.hashPassword.toString()
+        );
+        if (passwordMatch) {
+          loginUser(req, res, user);
+          const userId = user.id;
+          return res.redirect(`/users/${userId}`);
+        }
       }
+
+      errors.push("Login failed for the provided email address and password");
+    } else {
+      errors = validateErrors.array().map((error) => error.msg);
     }
 
-    errors.push("Login failed for the provided email address and password");
-  } else {
-    errors = validateErrors.array().map((error) => error.msg);
-  }
-
-  res.render("login", {
-    title: "Login",
-    email,
-    errors,
-    csrfToken: req.csrfToken(),
-  });
-}));
-
-
+    res.render("login", {
+      title: "Login",
+      email,
+      errors,
+      csrfToken: req.csrfToken(),
+    });
+  })
+);
 
 router.post("/logout", (req, res) => {
   logoutUser(req, res);
   res.redirect("/");
 });
 
-router.get("/signup", csrfProtection, asyncHandler (async (req, res) => {
-  const user = await db.User.build();
-  res.render("signup", {
-    title: "Signup",
-    user,
-    csrfToken: req.csrfToken(),
-  });
-}));
-
-router.post("/signup", csrfProtection, signupValidators, asyncHandler(async (req, res) => {
-  const { username, email, password } = req.body;
-
-  const user = await db.User.build({
-    username,
-    email,
-  });
-  const validatorErrors = validationResult(req);
-
-  if (validatorErrors.isEmpty()) {
-    const hashPassword = await bcrypt.hash(password, 10);
-    user.hashPassword = hashPassword;
-    await user.save();
-    res.redirect("/");
-  } else {
-    const errors = validatorErrors.array().map((error) => error.msg);
+router.get(
+  "/signup",
+  csrfProtection,
+  asyncHandler(async (req, res) => {
+    const user = await db.User.build();
+    console.log(req.csrfToken());
     res.render("signup", {
-      title: "Sign Up",
+      title: "Signup",
       user,
-      errors,
       csrfToken: req.csrfToken(),
     });
-  }
-}));
+  })
+);
 
+router.post(
+  "/signup",
+  csrfProtection,
+  signupValidators,
+  asyncHandler(async (req, res) => {
+    const { username, email, password } = req.body;
 
+    const user = await db.User.build({
+      username,
+      email,
+    });
+    const validatorErrors = validationResult(req);
+
+    if (validatorErrors.isEmpty()) {
+      const hashPassword = await bcrypt.hash(password, 10);
+      user.hashPassword = hashPassword;
+      await user.save();
+      res.redirect("/");
+    } else {
+      const errors = validatorErrors.array().map((error) => error.msg);
+      res.render("signup", {
+        title: "Sign Up",
+        user,
+        errors,
+        csrfToken: req.csrfToken(),
+      });
+    }
+  })
+);
 
 // work on this. REMOVE TRY CATCH.
+
 router.get("/:id", asyncHandler (async (req, res, next) => {
   const userId = req.params.id;
   const user = await db.User.findOne({
@@ -199,5 +211,6 @@ router.get("/:id", asyncHandler (async (req, res, next) => {
 // }
 
 }))
+
 
 module.exports = router;

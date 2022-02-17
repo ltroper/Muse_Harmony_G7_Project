@@ -4,48 +4,79 @@ append head
   //- add page specific styles by appending to the head
   link(rel="stylesheet" href="/stylesheets/index.css")
   //- add page specific js
-  script(src="/javascripts/index.js" type="module" defer)
+  script(src="./javascripts/index.js" type="module")
 
-
+block content
+  head
+    nav
+      .navbar
+          .logo
+            img(src='./images/muse.png' alt='Logo of Muse' width=60 height=60)
+          button.login-button.modal-show(onclick="document.getElementById('modal-login').style.display='block'") Login
+          div.modal-container#modal-login
+            form.modal-form(action="/users/login" method="POST")
+              span.close-btn(onclick="document.getElementById('modal-login').style.display='none'")
+                i(class="fa-solid fa-rectangle-xmark")
+              div.modal-img
+                img.logo-img(src='./images/muse.png' alt='Logo of Muse')
+              div.modal-inputs
+                input(type="hidden" name="_csrf" value=csrfToken)
+                label(for="email") Email
+                input(type="email" name="email" required)
+                label(for="password") Password
+                input(type="password" name="password" required)
+              div.modal-btn
+                button.submit-btn Submit
+          button.create-account.modal-show(onclick="document.getElementById('modal').style.display='block'") Create account
+          div.modal-container#modal
+            form.modal-form(action="/users/signup" method="POST")
+              span.close-btn(onclick="document.getElementById('modal').style.display='none'")
+                i(class="fa-solid fa-rectangle-xmark")
+              div.modal-img
+                img.logo-img(src='./images/muse.png' alt='Logo of Muse')
+              div.modal-inputs
+                input(type="hidden" name="_csrf" value=csrfToken)
+                label(for="username") Username
+                input(type="text" name="username" required)
+                label(for="email") Email
+                input(type="email" name="email" required)
+                label(for="password") Password
+                input(type="password" name="password" required)
+                label(for="confirmPassword") Confirm Password
+                input(type="password" name="confirmPassword" required)
+              div.modal-btn
+                button.submit-btn Submit
   body
-    block content
-      div#app
-        header
-        div.logo
-          img(src='./images/WOLF-Main.png' alt='Logo of Wolf' width=60 height=60)
-        nav.navbar
-          div.login-button
-            a(href='/users/login') Login
-          div.create-account
-            a(href='/users/signup') Create Account
-        main
-          div.main_container
-            div.mainImage
-              img(src='#' alt='Main Wolf' width=300 height=300)
-            div.trendingAlbums
-              a(href="/albums/:id") link to album
-                img(src='#' alt='Trending Wolf' width=300 height=300)
-                p Album title
-                p Artist
-          // Slideshow container
-          .slideshow-container
-            // Full-width images with number and caption text
-            .mySlides.fade
-              img(src='/images/banner1.jpg' style='width:100%')
-              .text Caption Text
-            .mySlides.fade
-              img(src='/images/banner2.jpg' style='width:100%')
-              .text Caption Two
-            .mySlides.fade
-
-              img(src='/images/banner3.jpg' style='width:100%')
-              .text Caption Three
-            // Next and previous buttons
-            a.prev(onclick='plusSlides(-1)') &#x276E;
-            a.next(onclick='plusSlides(1)') &#x276F;
-          br
-          // The dots/circles
-          div(style='text-align:center')
-            span.dot(onclick='currentSlide(1)')
-            span.dot(onclick='currentSlide(2)')
-            span.dot(onclick='currentSlide(3)')
+    div#app
+      div.main-container
+        .slideshow-container
+          .mySlides.fade
+            img(src='/images/banner1.jpg' style='width:100%')
+            .text Caption Text
+          .mySlides.fade
+            img(src='/images/banner2.jpg' style='width:100%')
+            .text Caption Two
+          .mySlides.fade
+            img(src='/images/banner3.jpg' style='width:100%')
+            .text Caption Three
+          // Next and previous buttons
+          a.prev &#x276E;
+          a.next &#x276F;
+        .middleContainer
+          p
+        .albums-container
+          .albumList-container1
+            a(href="/albums/:id")
+              img(src='#' alt='album-cover' width=300 height=300)
+              p Album title
+              p Artist
+            //- table
+            //-   tr
+            //-     th Album
+            //-   each album in albums
+            //-     tr
+            //-       td=album.album
+            a(href="/albums/:id")
+              img(src='#' alt='album-cover' width=300 height=300)
+              p Album title
+              p Artist
