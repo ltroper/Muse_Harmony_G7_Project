@@ -13,6 +13,9 @@ module.exports = (sequelize, DataTypes) => {
     // AlbumLibrary.hasMany(models.Album, {
     //   foreignKey: "albumId",
     // });
+      // AlbumLibrary.hasMany(models.Album, {
+      //   foreignKey: "albumId"
+      // })
   };
   return AlbumLibrary;
 };

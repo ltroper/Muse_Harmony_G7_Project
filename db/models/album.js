@@ -27,6 +27,9 @@ module.exports = (sequelize, DataTypes) => {
     // Album.hasMany(models.Review, {
     //   foreignKey: "albumId",
     // });
+    // Album.belongsTo(models.AlbumLibrary, {
+    //   foreignKey: "albumId"
+    // })
 
     Album.belongsToMany(models.User, {
       through: "LikedAlbum",

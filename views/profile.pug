@@ -2,3 +2,29 @@ extends layout.pug
 
 block content
     h2 TEST PROFILE
+    table
+        thead
+            tr
+                th(scope='col') Liked Albums
+        tbody
+            each album in albums
+                tr
+                    td= album.dataValues.name
+    table
+        thead
+            tr
+                th(scope='col') Reviews
+        tbody
+            each review in reviews
+                tr
+                    td= review.dataValues.name
+                    td= review.dataValues.Review.content
+    table
+        thead
+            tr
+                th(scope='col') Album Libraries
+        tbody
+            each library in array
+                tr
+                    td= library
+            

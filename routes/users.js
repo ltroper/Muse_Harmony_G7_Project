@@ -151,8 +151,10 @@ router.get("/:id", asyncHandler (async (req, res, next) => {
         }
       })
 
-      //to key into the albums
-      // console.log(likedAlbums[0].LikedAlbums);
+      const albums = likedAlbums[0].LikedAlbums
+      // console.log(`LENGTH: ${albums.length}`);
+      //to key into the album name
+      // console.log(albums[0].dataValues.name)
 
   const userLibrary = await db.User.findAll({
     where: {id: userId},
@@ -162,8 +164,31 @@ router.get("/:id", asyncHandler (async (req, res, next) => {
     },
     limit: 10
   })
+
+    const albumsOfLibrary = userLibrary[0].AlbumLibraries
+    const names = new Set();
+    let array = []
+    for (let i = 0; i < albumsOfLibrary.length; i++){
+      names.add(albumsOfLibrary[i].dataValues.AlbumLibrary.dataValues.name)
+    }
+    // console.log(names)
+    for (let item of names){
+      array.push(item)
+    }
+    // console.log(array)
+
+    const libraries = await db.AlbumLibrary.findAll({
+      where: {userId},
+      // include: {
+      //   model: db.Album
+      // },
+      limit: 10
+    })
+
+    console.log(libraries)
+
   // to key into album libraries
-  // console.log(userLibrary[0].AlbumLibraries);
+  // console.log(userLibrary[0].AlbumLibraries[0].dataValues.AlbumLibrary.dataValues.name);
 
   const reviewList = await db.User.findAll({
     where: {id: userId},
@@ -175,7 +200,9 @@ router.get("/:id", asyncHandler (async (req, res, next) => {
   })
   //To key into the review content
   // console.log(reviewList[0].Reviews[0].Review.content);
-  res.render("profile")
+  // console.log(reviews[0].dataValues.name)
+  const reviews = reviewList[0].Reviews
+  res.render("profile", {albums, reviews, array})
 }))
 
 module.exports = router;
