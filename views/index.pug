@@ -34,41 +34,44 @@ append head
     dots[slideIndex - 1].className += "active";
     }
 block content
+  head
+    nav
+      .navbar
+        .logo
+          img(src='./images/WOLF-Main.png' alt='Logo of Wolf' width=60 height=60)
+        .login-button
+          a(href='/users/login') Login
+        .create-account
+          a(href='/users/signup') Create Account
   body
     div#app
-      header
-        div.logo
-          img(src='./images/WOLF-Main.png' alt='Logo of Wolf' width=60 height=60)
-        nav
-          nav.navbar
-            div.login-button
-              a(href='/users/login') Login
-            div.create-account
-              a(href='/users/signup') Create Account
-      main
-        div.main-container
-          .slideshow-container
-            .mySlides.fade
-              img(src='/images/banner1.jpg' style='width:100%')
-              .text Caption Text
-            .mySlides.fade
-              img(src='/images/banner2.jpg' style='width:100%')
-              .text Caption Two
-            .mySlides.fade
-              img(src='/images/banner3.jpg' style='width:100%')
-              .text Caption Three
-            // Next and previous buttons
-            a.prev(onclick='plusSlides(-1)') &#x276E;
-            a.next(onclick='plusSlides(1)') &#x276F;
-          .albums-container
-            .albumList-container1
-              //- table
-              //-   tr
-              //-     th Album
-              //-   each album in albums
-              //-     tr
-              //-       td=album.album
-              a(href="/albums/:id")
-                img(src='#' alt='album-cover' width=300 height=300)
-                p Album title
-                p Artist
+      div.main-container
+        .slideshow-container
+          .mySlides.fade
+            img(src='/images/banner1.jpg' style='width:100%')
+            .text Caption Text
+          .mySlides.fade
+            img(src='/images/banner2.jpg' style='width:100%')
+            .text Caption Two
+          .mySlides.fade
+            img(src='/images/banner3.jpg' style='width:100%')
+            .text Caption Three
+          // Next and previous buttons
+          a.prev(onclick='plusSlides(-1)') &#x276E;
+          a.next(onclick='plusSlides(1)') &#x276F;
+        .albums-container
+          .albumList-container1
+            a(href="/albums/:id")
+              img(src='#' alt='album-cover' width=300 height=300)
+              p Album title
+              p Artist
+            //- table
+            //-   tr
+            //-     th Album
+            //-   each album in albums
+            //-     tr
+            //-       td=album.album
+            a(href="/albums/:id")
+              img(src='#' alt='album-cover' width=300 height=300)
+              p Album title
+              p Artist

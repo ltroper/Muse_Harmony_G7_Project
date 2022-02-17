@@ -3,37 +3,9 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  overflow-y: scroll;
-  overflow-x: none;
-}
-
-#app {
+nav {
   display: block;
 
-}
-
-header {
-    width: 100%;
-    display: flex;
-    position: absolute;
-    margin: 20px 120px;
-  }
-
-header {
-  display: flex;
-}
-
-main {
-  padding: 0 30px;
-  width: 1180px;
-}
-
-.main-container {
-  display: flex;
-  justify-content: center;
 }
 
 .navbar {
@@ -42,15 +14,6 @@ main {
   margin: 0;
   justify-content: flex-end;
   text-align: center;
-}
-
-.navbar a {
-  position: static;
-  padding: 10px 10px;
-}
-
-.navbar.logo {
-  justify-content: flex-start;
 }
 
 .login-button a {
@@ -72,6 +35,32 @@ main {
 .create-account a {
   text-decoration: none;
 }
+
+.logo a {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-y: scroll;
+  overflow-x: none;
+}
+
+#app {
+  display: block;
+  margin: 0px;
+}
+
+.main-container {
+  display: flex;
+  height: 1180px;
+  flex-direction: column;
+}
+
+
 
 .albums-container {
   display: flex;
