@@ -35,23 +35,19 @@ router.get(
 
     const libraryName = req.params.name;
 
-    // console.log(typeof(libraryName));
     let libArr = libraryName.split(" ");
     const name = libArr.join("-");
 
-    // const userLibrary = await db.AlbumLibrary.findAll({
-    //   where: {
-    //     name: `${name}`,
-    //   },
-    // });
-
-    //create a query the join table AlbumLibrary, where UserId, name
-    //for loop map to get album Id
-    //next query using OP array operator
+    const libraryUser = await db.AlbumLibrary.findOne({
+      where: {
+        name,
+      },
+    });
+    // console.log(libraryUser.userId);
 
     const userLibrary = await db.User.findAll({
       where: {
-        id: userId,
+        id: libraryUser.userId,
       },
       include: [
         {
@@ -66,7 +62,7 @@ router.get(
       ],
     });
 
-    console.log(userLibrary[0]);
+    console.log(userLibrary[0].AlbumLibraries);
     console.log(userId);
 
     res.render("library", { userLibrary, libraryName, user });
