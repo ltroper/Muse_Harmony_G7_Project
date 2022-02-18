@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
       artistId: DataTypes.INTEGER,
       releaseDate: DataTypes.STRING,
       albumArt: DataTypes.TEXT,
+      genre: DataTypes.STRING,
     },
     {}
   );
@@ -47,6 +48,7 @@ module.exports = (sequelize, DataTypes) => {
       through: "Review",
       foreignKey: "albumId",
       otherKey: "userId",
+      as: 'Reviews'
     })
 
   };
