@@ -1,5 +1,5 @@
 const { csrfProtection, asyncHandler } = require("./util");
-const { loginUser, logoutUser } = require("../auth");
+const { loginUser, logoutUser, requireAuth } = require("../auth");
 const { check, validationResult } = require("express-validator");
 const db = require("../db/models");
 const express = require("express");
@@ -7,9 +7,9 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 
 /* GET users listing. */
-router.get("/", function (req, res, next) {
-  res.send("respond with a resource");
-});
+// router.get("/", requireAuth, function (req, res, next) {
+//   res.send("respond with a resource");
+// });
 
 router.get("/login", csrfProtection, (req, res) => {
   res.render("login", {
@@ -150,7 +150,7 @@ router.post(
 
 // work on this. REMOVE TRY CATCH.
 
-router.get("/:id", asyncHandler (async (req, res, next) => {
+router.get("/:id", requireAuth, asyncHandler (async (req, res, next) => {
   const userId = req.params.id;
   const user = await db.User.findOne({
     where: { id: userId },
