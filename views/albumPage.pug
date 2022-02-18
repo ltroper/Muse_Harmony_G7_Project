@@ -4,7 +4,6 @@ block content
     p Hello Album!
     img(src=`${album.albumArt}`)
     p= `Album name: ${album.name}`
-    //-add artist name!!
     p= `Artist: ${album.Artist.dataValues.name}`
     p= `Genre: ${album.genre}`
     p= `Release date: ${album.releaseDate}`
@@ -17,8 +16,12 @@ block content
     p Reviews
     table(style='width:40%', border='1')
         tbody
-            each review in reviews
+            each review in albumReviews
                 .review-container
-                    tr
-                        td=review.Review.content
-                        td=review.Review.rating
+                    tr(id=`review-${review.id}`)
+                        td=review.content
+                        td=review.rating
+                        td
+                            if locals.userId == review.userId
+                                Button Edit
+                                Button Delete

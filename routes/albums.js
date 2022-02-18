@@ -23,22 +23,19 @@ router.get("/:id", asyncHandler (async (req, res) => {
       }
     });
 
-  console.log(album.Artist.dataValues.name);
 
-    const albumReviews = await db.Album.findOne({
-        where: {id: albumId},
-        include: {
-          model: db.User,
-          as: 'Reviews'
-        }
+
+    //fix this!!!
+    const albumReviews = await db.Review.findAll({
+        where: {albumId},
       });
 
-      
 
 
 
-    const reviews = albumReviews.Reviews
-    res.render("albumPage", {album, reviews})
+
+      console.log(albumReviews[0].content)
+    res.render("albumPage", {album, albumReviews})
 
 }));
 
@@ -58,6 +55,19 @@ router.post("/:id", asyncHandler(async (req, res) =>{
 
 
 }))
+
+router.put("/:id/reviewId", asyncHandler(async (req, res) => {
+
+    //1. extract reviewId
+    //2. grab new text from req.body
+    //3. update review content in db with new text db.table.update
+    //4. send JSON object message: 'success' (if successful)
+
+
+
+
+}))
+
 
 
 module.exports = router;
