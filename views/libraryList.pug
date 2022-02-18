@@ -1,0 +1,14 @@
+extends layout.pug
+
+block content
+    p Hello Libraries!
+    table
+        thead
+            tr
+                th Library
+        tbody
+            each library in libraryList
+                tr
+
+                    td= library.name
+                        a(href=`/libraries/${library.id}`)

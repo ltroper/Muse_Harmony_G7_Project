@@ -1,0 +1,15 @@
+extends layout.pug
+
+block content
+    h2= libraryName
+    table
+        thead
+            tr
+                th(scope='col') Album Libraries
+        tbody
+            each album in userLibrary
+                tr
+                    td= album.dataValues.albumId
+                        if locals.userId == user.id
+                            form(class='editProfile' action='/library/:id' method='post')
+                                button(type='submit') Remove
