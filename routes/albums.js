@@ -18,7 +18,12 @@ router.get("/:id", asyncHandler (async (req, res) => {
     const albumId = req.params.id;
     const album = await db.Album.findOne({
     where: { id: albumId },
+    include: {
+      model:db.Artist
+      }
     });
+
+  console.log(album.Artist.dataValues.name);
 
     const albumReviews = await db.Album.findOne({
         where: {id: albumId},
@@ -26,15 +31,16 @@ router.get("/:id", asyncHandler (async (req, res) => {
           model: db.User,
           as: 'Reviews'
         }
-      })
+      });
 
-    // console.log(albumReviews.Reviews[0].Review.content)
+      
 
 
-    const review = albumReviews.Reviews[0].Review.content
-    res.render("albumPage", {album, review})
 
-}))
+    const reviews = albumReviews.Reviews
+    res.render("albumPage", {album, reviews})
+
+}));
 
 router.post("/:id", asyncHandler(async (req, res) =>{
     const content = req.body.review;
@@ -48,7 +54,6 @@ router.post("/:id", asyncHandler(async (req, res) =>{
       albumId,
       userId
     })
-
     res.redirect(`/albums/${albumId}`)
 
 
