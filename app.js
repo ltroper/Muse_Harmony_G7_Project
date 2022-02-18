@@ -12,6 +12,7 @@ const usersRouter = require("./routes/users");
 const modalRouter = require("./routes/modal");
 const libraryRouter = require("./routes/libraries");
 
+const albumsRouter = require("./routes/albums")
 const { sessionSecret } = require("./config/index");
 const { restoreUser } = require("./auth");
 
@@ -47,6 +48,7 @@ app.use("/users", usersRouter);
 app.use("/modal", modalRouter);
 app.use("/library", libraryRouter);
 
+app.use("/albums", albumsRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

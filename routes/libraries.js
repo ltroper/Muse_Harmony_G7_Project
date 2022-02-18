@@ -8,6 +8,12 @@ const db = require("../db/models");
 
 const router = express.Router();
 
+router.get("/", requireAuth,async (req, res) => {
+  const libraryList = await db.AlbumLibrary.findAll()
+
+  res.render("library", {libraryList});
+})
+
 router.get("/:name", requireAuth, asyncHandler (async (req, res, next) => {
   const { userId } = req.session.auth;
   const user = await db.User.findOne({
