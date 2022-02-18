@@ -8,80 +8,108 @@ const db = require("../db/models");
 
 const router = express.Router();
 
-router.get("/", csrfProtection, requireAuth, asyncHandler (async (req, res) => {
-  //generate a list showing all libraries
+router.get(
+  "/",
+  csrfProtection,
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    //generate a list showing all libraries
 
+    const libraryList = await db.AlbumLibrary.findAll();
 
-  const libraryList = await db.AlbumLibrary.findAll()
+    res.render("libraryList", { libraryList });
+  })
+);
 
-  res.render("libraryList", {libraryList});
-}))
+router.get(
+  "/:name",
+  csrfProtection,
+  requireAuth,
+  asyncHandler(async (req, res, next) => {
+    //genenerate a library showing a list of albums
 
-router.get("/:name", csrfProtection, requireAuth, asyncHandler (async (req, res, next) => {
-  //genenerate a library showing a list of albums
+    const { userId } = req.session.auth;
+    const user = await db.User.findOne({
+      where: { id: userId },
+    });
 
-  const { userId } = req.session.auth;
-  const user = await db.User.findOne({
-    where: { id: userId },
-  });
+    const libraryName = req.params.name;
 
-  const libraryName = req.params.name
+    // console.log(typeof(libraryName));
+    let libArr = libraryName.split(" ");
+    const name = libArr.join("-");
 
-  // console.log(typeof(libraryName));
-  let libArr = libraryName.split(' ');
-  const name = libArr.join('-');
+    // const userLibrary = await db.AlbumLibrary.findAll({
+    //   where: {
+    //     name: `${name}`,
+    //   },
+    // });
 
-  const userLibrary = await db.AlbumLibrary.findAll({
-    where: {
-      name: `${name}`,
-    },
-  });
+    //create a query the join table AlbumLibrary, where UserId, name
+    //for loop map to get album Id
+    //next query using OP array operator
 
-  //create a query the join table AlbumLibrary, where UserId, name
-  //for loop map to get album Id
-  //next query using OP array operator
+    const userLibrary = await db.User.findAll({
+      where: {
+        id: userId,
+      },
+      include: [
+        {
+          model: db.Album,
+          as: "AlbumLibraries",
+          through: {
+            where: {
+              name: `${name}`,
+            },
+          },
+        },
+      ],
+    });
 
-  // const userLibrary = await db.User.findAll({
-  //   where: {
-  //     id: userId,
-  //   },
-  //   include: [{
-  //     model: db.Album,
-  //     as: "AlbumLibraries",
-  //     through: {
-  //       where: {
-  //         AlbumLibraries: `${name}`
-  //       },
-  //     }
-  //   }],
-  // })
+    console.log(userLibrary[0]);
+    console.log(userId);
 
-  console.log(userLibrary);
-  res.render("library", {userLibrary, libraryName, user});
-}));
+    res.render("library", { userLibrary, libraryName, user });
+  })
+);
 
-const libraryValidator = [
+const libraryValidator = [];
 
-]
+router.post(
+  "/library/add",
+  csrfProtection,
+  requireAuth,
+  libraryValidator,
+  asyncHandler(async (req, res) => {
+    //from the profile page & the library list, click a button and a form will prompt the user to be able to add a library
+    //restrict name to just letters, spaces, and numbers
+    //name in data base has dashes for spaces
 
-router.post("/library/add", csrfProtection, requireAuth, libraryValidator, asyncHandler(async (req, res)=>{
-  //from the profile page & the library list, click a button and a form will prompt the user to be able to add a library
-  //restrict name to just letters, spaces, and numbers
-  //name in data base has dashes for spaces
+    res.render("libraryAdd");
+  })
+);
 
-  res.render("libraryAdd")
-}))
+router.post(
+  "/library/edit",
+  csrfProtection,
+  requireAuth,
+  libraryValidator,
+  asyncHandler(async (req, res) => {
+    //after clicking on edit (for my own library) I am able to modify the name of the library
 
-router.post("/library/edit", csrfProtection, requireAuth, libraryValidator, asyncHandler(async (req, res)=>{
-  //after clicking on edit (for my own library) I am able to modify the name of the library
+    res.render("libraryAdd");
+  })
+);
 
-  res.render("libraryAdd")
-}))
+router.post(
+  "/library/delete",
+  csrfProtection,
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    //on my profile page, I can delete my library
 
-router.post("/library/delete", csrfProtection, requireAuth, asyncHandler(async (req, res)=>{
-  //on my profile page, I can delete my library
-
-  res.render("libraryList")
-}))
+    res.render("libraryList");
+  })
+);
 
 module.exports = router;
