@@ -30,8 +30,27 @@ router.get("/:id", asyncHandler (async (req, res) => {
 
     // console.log(albumReviews.Reviews[0].Review.content)
 
+
     const review = albumReviews.Reviews[0].Review.content
     res.render("albumPage", {album, review})
+
+}))
+
+router.post("/:id", asyncHandler(async (req, res) =>{
+    const content = req.body.review;
+    const userId = res.locals.userId;
+    const albumId = req.params.id;
+    const rating = req.body.rating;
+
+    await db.Review.create({
+      content,
+      rating,
+      albumId,
+      userId
+    })
+
+    res.redirect(`/albums/${albumId}`)
+
 
 }))
 

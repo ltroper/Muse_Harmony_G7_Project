@@ -9,3 +9,9 @@ block content
     p= `${album.releaseDate}`
     //-has to be all the reviews
     p= `Reviews: ${review}`
+    form(action=`/albums/${album.id}` method="POST")
+        label(for="review") What did you think of this album?
+        textarea(name="review", cols="30", rows="10")
+        label(for="rating") Rating
+        input(type="number" name="rating" required)
+        button Submit
