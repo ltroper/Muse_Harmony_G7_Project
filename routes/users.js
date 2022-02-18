@@ -7,9 +7,9 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 
 /* GET users listing. */
-// router.get("/", requireAuth, function (req, res, next) {
-//   res.send("respond with a resource");
-// });
+router.get("/", requireAuth, function (req, res, next) {
+  res.redirect("/:id");
+});
 
 router.get("/login", csrfProtection, (req, res) => {
   res.render("login", {
