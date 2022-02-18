@@ -1,6 +1,3 @@
-// window.addEventListener("load", (event) => {
-console.log("hello from javascript!");
-
 /* Slideshow */
 let slideIndex = 1;
 function plusSlides(n) {
@@ -28,7 +25,6 @@ next[0].addEventListener("click", () => {
 function showSlides(n) {
   let i;
   let slides = document.getElementsByClassName("mySlides");
-  // let dots = document.getElementsByClassName("dot");
   if (n > slides.length) {
     slideIndex = 1;
   }
@@ -38,10 +34,5 @@ function showSlides(n) {
   for (i = 0; i < slides.length; i++) {
     slides[i].style.display = "none";
   }
-  // for (i = 0; i < dots.length; i++) {
-  //   dots[i].className = dots[i].className.replace("active", "");
-  // }
   slides[slideIndex - 1].style.display = "block";
-  // dots[slideIndex - 1].className += "active";
 }
-// });

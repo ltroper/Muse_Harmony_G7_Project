@@ -25,16 +25,11 @@ router.get("/:id", asyncHandler (async (req, res) => {
 
 
 
-    //fix this!!!
+
     const albumReviews = await db.Review.findAll({
         where: {albumId},
       });
-
-
-
-
-
-      console.log(albumReviews[0].content)
+  
     res.render("albumPage", {album, albumReviews})
 
 }));

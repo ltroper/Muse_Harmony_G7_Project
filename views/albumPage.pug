@@ -1,4 +1,9 @@
-extends layout.pug
+extends layout
+
+append head
+    link(rel="stylesheet" href="/stylesheets/index.css")
+    script(src="/javascripts/album.js" type="module")
+
 
 block content
     p Hello Album!
@@ -18,10 +23,10 @@ block content
         tbody
             each review in albumReviews
                 .review-container
-                    tr(id=`review-${review.id}`)
-                        td=review.content
+                    tr
+                        td(id=`content-${review.id}`)=review.content
                         td=review.rating
-                        td
+                        td(id=`review-${review.id}`)
                             if locals.userId == review.userId
-                                Button Edit
-                                Button Delete
+                                Button.edit-review-button Edit
+                                Button.delete-review-button Delete
