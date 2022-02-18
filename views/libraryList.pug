@@ -2,10 +2,13 @@ extends layout.pug
 
 block content
     p Hello Libraries!
-    img(src=`${libraryList.albumArt}`)
-    p= `${libraryList.name}`
-    //-add artist name!!
-    p= `${libraryList.genre}`
-    p= `${libraryList.releaseDate}`
-    //-has to be all the reviews
-    p= `Reviews: ${review}`
+    table
+        thead
+            tr
+                th Library
+        tbody
+            each library in libraryList
+                tr
+
+                    td= library.name
+                        a(href=`/libraries/${library.id}`)

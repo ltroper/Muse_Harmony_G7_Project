@@ -46,7 +46,7 @@ app.use(restoreUser);
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/modal", modalRouter);
-app.use("/library", libraryRouter);
+app.use("/libraries", libraryRouter);
 
 app.use("/albums", albumsRouter)
 
