@@ -15,11 +15,62 @@ router.get(
   asyncHandler(async (req, res) => {
     //generate a list showing all libraries
 
-    const libraryList = await db.AlbumLibrary.findAll();
+    //provides all albums in a library
+    const { userId } = req.session.auth;
+    const user = await db.User.findOne({
+      where: { id: userId },
+    });
 
-    res.render("libraryList", { libraryList });
-  })
-);
+    //find all albums a user has added to a library
+    const libraryList = await db.AlbumLibrary.findAll({
+      where: {
+        userId
+      }
+    });
+
+    // console.log(libraryList[0]);
+
+    //provides unique library names no duplicates
+    const uniqueLists = new Set();
+    const uniqueNameArr = [];
+    for (let i = 0; i < libraryList.length; i++){
+      let listAlbum = libraryList[i];
+      if(!uniqueLists.has(listAlbum.dataValues.name)){
+        uniqueLists.add(listAlbum.dataValues.name);
+        uniqueNameArr.push(listAlbum.dataValues.name);
+      }
+    }
+
+    //iterate through unique names Arr to find albums attached to each library
+
+    let userLibraries = [];
+
+    for(let i = 0; i < uniqueNameArr.length; i++){
+      let name = uniqueNameArr[i];
+
+      const albumsList = await db.User.findAll({
+        where: {
+          id: userId,
+        },
+        include: [
+          {
+            model: db.Album,
+            as: "AlbumLibraries",
+            through: {
+              where: {
+                name: `${name}`,
+              },
+            },
+          },
+        ],
+      });
+      userLibraries.push(albumsList[0].AlbumLibraries);
+    }
+    console.log(userLibraries[1][1].dataValues.name);
+
+    res.render("libraryList", { userLibraries, uniqueNameArr });
+  }
+));
 
 router.get(
   "/:name",
