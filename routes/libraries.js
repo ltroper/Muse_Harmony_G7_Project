@@ -66,7 +66,11 @@ router.get(
       });
       userLibraries.push(albumsList[0].AlbumLibraries);
     }
-    console.log(userLibraries[1][1].dataValues.name);
+    // console.log(userLibraries[1]);
+    // console.log(userLibraries[1][1].dataValues.name);
+
+    let albums = [];
+    for (let i = 0; i < userLibraries.length; i++) {}
 
     res.render("libraryList", { userLibraries, uniqueNameArr });
   })
