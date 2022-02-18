@@ -1,0 +1,11 @@
+extends layout.pug
+
+block content
+    p Hello Album!
+    img(src=`${album.albumArt}`)
+    p= `${album.name}`
+    //-add artist name!!
+    p= `${album.genre}`
+    p= `${album.releaseDate}`
+    //-has to be all the reviews
+    p= `Reviews: ${review}`
