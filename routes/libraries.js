@@ -24,8 +24,8 @@ router.get(
     //find all albums a user has added to a library
     const libraryList = await db.AlbumLibrary.findAll({
       where: {
-        userId
-      }
+        userId,
+      },
     });
 
     // console.log(libraryList[0]);
@@ -33,9 +33,9 @@ router.get(
     //provides unique library names no duplicates
     const uniqueLists = new Set();
     const uniqueNameArr = [];
-    for (let i = 0; i < libraryList.length; i++){
+    for (let i = 0; i < libraryList.length; i++) {
       let listAlbum = libraryList[i];
-      if(!uniqueLists.has(listAlbum.dataValues.name)){
+      if (!uniqueLists.has(listAlbum.dataValues.name)) {
         uniqueLists.add(listAlbum.dataValues.name);
         uniqueNameArr.push(listAlbum.dataValues.name);
       }
@@ -45,7 +45,7 @@ router.get(
 
     let userLibraries = [];
 
-    for(let i = 0; i < uniqueNameArr.length; i++){
+    for (let i = 0; i < uniqueNameArr.length; i++) {
       let name = uniqueNameArr[i];
 
       const albumsList = await db.User.findAll({
@@ -69,8 +69,8 @@ router.get(
     console.log(userLibraries[1][1].dataValues.name);
 
     res.render("libraryList", { userLibraries, uniqueNameArr });
-  }
-));
+  })
+);
 
 router.get(
   "/:name",
@@ -132,6 +132,13 @@ router.post(
     //restrict name to just letters, spaces, and numbers
     //name in data base has dashes for spaces
 
+    const { name } = req.body;
+
+    const newLibrary = await AlbumLibrary.create({
+      name,
+      userId: req.session.user.userId,
+    });
+
     res.render("libraryAdd");
   })
 );
@@ -154,6 +161,14 @@ router.post(
   requireAuth,
   asyncHandler(async (req, res) => {
     //on my profile page, I can delete my library
+
+    const library = await AlbumLibraries.findAll({
+      where: {
+        name: libraryName,
+        userId: req.session.user.userId,
+      },
+    });
+    await library.destroy();
 
     res.render("libraryList");
   })
