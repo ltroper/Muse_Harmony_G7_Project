@@ -29,7 +29,7 @@ router.get("/:id", asyncHandler (async (req, res) => {
     const albumReviews = await db.Review.findAll({
         where: {albumId},
       });
-  
+
     res.render("albumPage", {album, albumReviews})
 
 }));
@@ -51,14 +51,21 @@ router.post("/:id", asyncHandler(async (req, res) =>{
 
 }))
 
-router.put("/:id/reviewId", asyncHandler(async (req, res) => {
+router.post("/:id/reviewId", asyncHandler(async (req, res) => {
 
     //1. extract reviewId
     //2. grab new text from req.body
     //3. update review content in db with new text db.table.update
     //4. send JSON object message: 'success' (if successful)
 
+  const reviewId = req.reviewId;
+  const content = req.body
 
+  db.Review.update({
+    where: {
+      id: reviewId
+    }
+  })
 
 
 }))
