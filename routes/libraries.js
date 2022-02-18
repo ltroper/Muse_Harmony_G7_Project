@@ -31,24 +31,30 @@ router.get("/:name", csrfProtection, requireAuth, asyncHandler (async (req, res,
   let libArr = libraryName.split(' ');
   const name = libArr.join('-');
 
-  // const userLibrary = await db.AlbumLibrary.findAll({
-  //   where: {name: `${name}`},
-  // });
-
-  const userLibrary = await db.User.findAll({
+  const userLibrary = await db.AlbumLibrary.findAll({
     where: {
-      id: userId,
+      name: `${name}`,
     },
-    include: [{
-      model: db.Album,
-      as: "AlbumLibraries",
-      through: {
-        where: {
-          name: `${name}`
-        },
-      }
-    }],
-  })
+  });
+
+  //create a query the join table AlbumLibrary, where UserId, name
+  //for loop map to get album Id
+  //next query using OP array operator
+
+  // const userLibrary = await db.User.findAll({
+  //   where: {
+  //     id: userId,
+  //   },
+  //   include: [{
+  //     model: db.Album,
+  //     as: "AlbumLibraries",
+  //     through: {
+  //       where: {
+  //         AlbumLibraries: `${name}`
+  //       },
+  //     }
+  //   }],
+  // })
 
   console.log(userLibrary);
   res.render("library", {userLibrary, libraryName, user});
