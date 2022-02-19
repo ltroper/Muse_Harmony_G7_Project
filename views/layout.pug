@@ -1,16 +1,22 @@
 doctype html
+
+include utils.pug
+
 html
   head
     block head
       title="MuseHarmony"
       link(rel='stylesheet' href='/stylesheets/reset.css')
       link(rel='stylesheet' href='/stylesheets/modal.css')
+      link(rel="stylesheet" href="/stylesheets/index.css")
       script(src="https://kit.fontawesome.com/47fd074cda.js" crossorigin="anonymous")
+      if locals.authenticated
+        +signedIn
+      else
+        +signedOut
+
 
 body
-  if locals.authenticated
-    form(class='logout' action='/users/logout' method='post')
-      button(type='submit') Logout
   block content
     nav.navbar
       div.museharmony MuseHarmony
