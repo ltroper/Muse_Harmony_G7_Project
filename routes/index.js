@@ -7,11 +7,19 @@ const router = express.Router();
 
 /* GET home page. */
 
-router.get("/", csrfProtection, (req, res) => {
-  console.log(req.csrfToken());
+router.get("/", csrfProtection, asyncHandler ( async (req, res) => {
+  // console.log(req.csrfToken());
+    const albums = await db.Album.findAll({
+    include: {
+      model:db.Artist
+      },
+      limit: 10,
+    });
+
   res.render("index", {
     csrfToken: req.csrfToken(),
+    albums
   });
-});
+}));
 
 module.exports = router;
