@@ -54,3 +54,11 @@ mixin signedIn
               button(type='submit') My Profile
           form(class='logout' action='/users/logout' method='post')
               button(type='submit') Logout
+
+mixin validationErrorSummary(errors)
+  if errors
+    div(class='alert' role='alert')
+      p The following error(s) occurred:
+      ul
+        each error in errors
+          li= error
