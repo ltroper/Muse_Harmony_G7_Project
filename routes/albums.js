@@ -61,12 +61,11 @@ router.put("/:id/reviewId", asyncHandler(async (req, res) => {
   const reviewId = req.reviewId;
   const content = req.body
 
-  await db.Review.findByPk(reviewId)({
-    where: {
-      id: reviewId
-    },
-    body: {content}
-  })
+  const review = await db.Review.findByPk(reviewId)
+    review.content = content;
+    await review.save()
+    res.json({review})
+  }))
 
 //   const {message} = req.body
 //     const tweet = await Tweet.findByPk(req.params.id);
@@ -76,7 +75,6 @@ router.put("/:id/reviewId", asyncHandler(async (req, res) => {
 // }))
 
 
-}))
 
 
 
