@@ -47,6 +47,7 @@ router.get(
 
     for (let i = 0; i < uniqueNameArr.length; i++) {
       let name = uniqueNameArr[i];
+      console.log(uniqueNameArr);
 
       const albumsList = await db.User.findAll({
         where: {
@@ -64,7 +65,8 @@ router.get(
           },
         ],
       });
-      userLibraries.albumsList[0].AlbumLibraries;
+      console.log(name);
+      userLibraries = { name: albumsList[0].AlbumLibraries };
     }
     console.log(userLibraries);
     // console.log(userLibraries[1][1].dataValues.name);
@@ -114,8 +116,8 @@ router.get(
       ],
     });
 
-    console.log(userLibrary[0].AlbumLibraries);
-    console.log(userId);
+    // console.log(userLibrary[0].AlbumLibraries);
+    // console.log(userId);
 
     res.render("library", { userLibrary, libraryName, user });
   })
