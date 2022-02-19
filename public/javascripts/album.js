@@ -42,8 +42,10 @@ Array.from(editReviewButtons).forEach((editButton) => {
 
         const elementId = e.target.parentNode.id.split('-')[1];
         const tableEle = document.getElementById(`content-${elementId}`)
+        const tableRating = document.getElementById(`rating-${elementId}`)
         const reviewText = tableEle.innerText
         tableEle.innerHTML = `<textarea id=textarea-${elementId}>${reviewText}</textarea>`
+        tableRating.innerHTML = `<input id=numInput-${elementId} type="number" name="rating" min="1" max="10" required="required" />`
 
         changeButtons(e)
 
@@ -52,6 +54,7 @@ Array.from(editReviewButtons).forEach((editButton) => {
             singleSubmit.addEventListener("click", async (e) => {
                 const submitId =e.target.id.split("-")[1];
                 const content = document.getElementById(`textarea-${submitId}`).value
+                const rating = document.getElementById(`numInput-${submitId}`).value
                 console.log(content)
                 //fix ab for the album id
                 const fetchResponse = await fetch(`/albums/ab/${submitId}`, {
@@ -61,14 +64,18 @@ Array.from(editReviewButtons).forEach((editButton) => {
                     },
                     body: JSON.stringify({
                         content,
+                        rating,
                         reviewId: submitId
                     })
                   })
                   const data = await fetchResponse.json()
                 //   console.log(data.review.content)
                   if (data){
-                      const newContent = document.getElementById(`content-${submitId}`)
-                      newContent.innerText = data.review.content
+                      const newContent = document.getElementById(`content-${submitId}`);
+                      newContent.innerText = data.review.content;
+                      const newRating = document.getElementById(`rating-${elementId}`);
+                      newRating.innerText = data.review.rating;
+
                   }
 
 

@@ -6,7 +6,6 @@ append head
 
 
 block content
-    p Hello Album!
     img(src=`${album.albumArt}`)
     p= `Album name: ${album.name}`
     p= `Artist: ${album.Artist.dataValues.name}`
@@ -25,7 +24,7 @@ block content
                 .review-container
                     tr
                         td(id=`content-${review.id}`)=review.content
-                        td=review.rating
+                        td(id=`rating-${review.id}`)=review.rating
                         td(id=`review-${review.id}`)
                             if locals.userId == review.userId
                                 Button(class="edit-review-button active" id=`edit-${review.id}`) Edit
