@@ -18,22 +18,66 @@ router.get("/:id", asyncHandler (async (req, res) => {
     const albumId = req.params.id;
     const album = await db.Album.findOne({
     where: { id: albumId },
+    include: {
+      model:db.Artist
+      }
     });
 
-    const albumReviews = await db.Album.findOne({
-        where: {id: albumId},
-        include: {
-          model: db.User,
-          as: 'Reviews'
-        }
-      })
 
-    // console.log(albumReviews.Reviews[0].Review.content)
 
-    const review = albumReviews.Reviews[0].Review.content
-    res.render("albumPage", {album, review})
+
+    const albumReviews = await db.Review.findAll({
+        where: {albumId},
+      });
+
+    res.render("albumPage", {album, albumReviews})
+
+}));
+
+router.post("/:id", asyncHandler(async (req, res) =>{
+    const content = req.body.review;
+    const userId = res.locals.userId;
+    const albumId = req.params.id;
+    const rating = req.body.rating;
+
+    await db.Review.create({
+      content,
+      rating,
+      albumId,
+      userId
+    })
+    res.redirect(`/albums/${albumId}`)
+
 
 }))
+
+router.put("/:id/reviewId", asyncHandler(async (req, res) => {
+
+    //1. extract reviewId
+    //2. grab new text from req.body
+    //3. update review content in db with new text db.table.update
+    //4. send JSON object message: 'success' (if successful)
+
+  const reviewId = req.reviewId;
+  const content = req.body
+
+  await db.Review.findByPk(reviewId)({
+    where: {
+      id: reviewId
+    },
+    body: {content}
+  })
+
+//   const {message} = req.body
+//     const tweet = await Tweet.findByPk(req.params.id);
+//     tweet.message = message;
+//     await tweet.save();
+//     res.json({tweet});
+// }))
+
+
+}))
+
 
 
 module.exports = router;

@@ -1,11 +1,34 @@
-extends layout.pug
+extends layout
+
+append head
+    link(rel="stylesheet" href="/stylesheets/albumPage.css")
+    script(src="/javascripts/album.js" type="module")
+
 
 block content
     p Hello Album!
     img(src=`${album.albumArt}`)
-    p= `${album.name}`
-    //-add artist name!!
-    p= `${album.genre}`
-    p= `${album.releaseDate}`
-    //-has to be all the reviews
-    p= `Reviews: ${review}`
+    p= `Album name: ${album.name}`
+    p= `Artist: ${album.Artist.dataValues.name}`
+    p= `Genre: ${album.genre}`
+    p= `Release date: ${album.releaseDate}`
+    form(action=`/albums/${album.id}` method="POST")
+        label(for="review") What did you think of this album?
+        textarea(name="review" cols="30" rows="10" required)
+        label(for="rating") Rating
+        input(type="number" name="rating" min='1' max='10' required)
+        button Submit
+    p Reviews
+    table(style='width:40%', border='1')
+        tbody
+            each review in albumReviews
+                .review-container
+                    tr
+                        td(id=`content-${review.id}`)=review.content
+                        td=review.rating
+                        td(id=`review-${review.id}`)
+                            if locals.userId == review.userId
+                                Button(class="edit-review-button active" id=`edit-${review.id}`) Edit
+                                Button(class="delete-review-button active" id=`delete-${review.id}`) Delete
+                                Button(class="submit-review-button hidden" id=`submit-${review.id}`) Submit
+                                Button(class="cancel-review-button hidden" id=`cancel-${review.id}`) Cancel
