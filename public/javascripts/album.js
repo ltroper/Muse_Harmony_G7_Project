@@ -19,19 +19,27 @@ const changeButtons = (e) =>{
 
 
 
+Array.from(deleteReviewButtons).forEach((deleteButton) => {
+    deleteButton.addEventListener("click", async (e) => {
+        const deleteId =e.target.id.split("-")[1];
+        const res = await fetch(`/albums/ab/${deleteId}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+              }
+        })
+        const data = await res.json()
+        if (data){
+            document.getElementById(`content-${deleteId}`).parentNode.remove()
+        }
+
+    })
+})
+
+
 Array.from(editReviewButtons).forEach((editButton) => {
     editButton.addEventListener("click", (e) => {
-        /*
-        -get the id of the review.
 
-        -get the table ele that belongs to the review.
-
-        -change the table ele inner html to a textarea
-
-        -change the edit and delete button to dif buttons, submit & cancel.
-            -submit button, needs an event listener.
-            -cancel button, need an event listener.
-        */
         const elementId = e.target.parentNode.id.split('-')[1];
         const tableEle = document.getElementById(`content-${elementId}`)
         const reviewText = tableEle.innerText
