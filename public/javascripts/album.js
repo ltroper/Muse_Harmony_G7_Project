@@ -46,13 +46,17 @@ Array.from(editReviewButtons).forEach((editButton) => {
                 const content = document.getElementById(`textarea-${submitId}`).value
                 console.log(content)
                 await fetch("/albums/:id/reviewId", {
-                    method: "POST",
+                    method: "PUT",
                     headers: {
                       "Content-Type": "application/x-www-form-urlencoded"
                     },
-                    body: content,
-                    reviewId: submitId
+                    body: {
+                        content,
+                        reviewId: submitId
+                    }
                   })
+
+
 
             })
         })
