@@ -56,15 +56,17 @@ router.put("/:id/:reviewId", asyncHandler(async (req, res) => {
 
   const reviewId = req.body.reviewId;
   const content = req.body.content;
+  const rating = req.body.rating;
 
   const review = await db.Review.findByPk(reviewId)
     review.content = content;
+    review.rating = rating;
     await review.save()
     res.json({review})
   }))
 
 
-router.delete("/ab/:reviewId", asyncHandler(async (req, res) => {
+router.delete("/:id/:reviewId", asyncHandler(async (req, res) => {
   const reviewId = req.params.reviewId;
   const review = await db.Review.findByPk(reviewId)
   if (review){
