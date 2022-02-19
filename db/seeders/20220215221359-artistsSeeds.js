@@ -6,57 +6,57 @@ module.exports = {
       "Artists",
       [
         {
-          name: "Ronald Kozey III",
+          name: "The Beatles",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          name: "Sarah Jacobson",
+          name: "Coldplay",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          name: "Roger Altenwerth",
+          name: "N.W.A.",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          name: "Pablo Langworth IV",
+          name: "Taylor Swift",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          name: "Tyrone O'Keefe DDS",
+          name: "Drake",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          name: "Jeffrey Beier",
+          name: "John Williams",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          name: "Mrs. Richard Christiansen",
+          name: "Slayer",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          name: "Domingo Purdy",
+          name: "Metallica",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          name: "Cora Stiedemann",
+          name: "Bad Bunny",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          name: "Cary Hegmann",
+          name: "Lady Gaga",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          name: "James Lebsack",
+          name: "The Weeknd",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
