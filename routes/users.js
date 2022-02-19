@@ -90,12 +90,7 @@ router.post(
       errors = validateErrors.array().map((error) => error.msg);
     }
 
-    res.render("login", {
-      title: "Login",
-      email,
-      errors,
-      csrfToken: req.csrfToken(),
-    });
+    res.redirect("/");
   })
 );
 
@@ -104,19 +99,19 @@ router.post("/logout", (req, res) => {
   res.redirect("/");
 });
 
-router.get(
-  "/signup",
-  csrfProtection,
-  asyncHandler(async (req, res) => {
-    const user = await db.User.build();
-    console.log(req.csrfToken());
-    res.render("signup", {
-      title: "Signup",
-      user,
-      csrfToken: req.csrfToken(),
-    });
-  })
-);
+// router.get(
+//   "/signup",
+//   csrfProtection,
+//   asyncHandler(async (req, res) => {
+//     const user = await db.User.build();
+//     console.log(req.csrfToken());
+//     res.render("signup", {
+//       title: "Signup",
+//       user,
+//       csrfToken: req.csrfToken(),
+//     });
+//   })
+// );
 
 router.post(
   "/signup",
@@ -138,12 +133,7 @@ router.post(
       res.redirect("/");
     } else {
       const errors = validatorErrors.array().map((error) => error.msg);
-      res.render("signup", {
-        title: "Sign Up",
-        user,
-        errors,
-        csrfToken: req.csrfToken(),
-      });
+      res.redirect("/");
     }
   })
 );
