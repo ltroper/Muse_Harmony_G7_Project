@@ -57,7 +57,11 @@ Array.from(editReviewButtons).forEach((editButton) => {
                     })
                   })
                   const data = await fetchResponse.json()
-                  console.log(data)
+                //   console.log(data.review.content)
+                  if (data){
+                      const newContent = document.getElementById(`content-${submitId}`)
+                      newContent.innerText = data.review.content
+                  }
 
 
 
