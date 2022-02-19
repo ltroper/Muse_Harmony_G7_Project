@@ -51,15 +51,15 @@ router.post("/:id", asyncHandler(async (req, res) =>{
 
 }))
 
-router.put("/:id/reviewId", asyncHandler(async (req, res) => {
+router.put("/:id/:reviewId", asyncHandler(async (req, res) => {
 
     //1. extract reviewId
     //2. grab new text from req.body
     //3. update review content in db with new text db.table.update
     //4. send JSON object message: 'success' (if successful)
 
-  const reviewId = req.reviewId;
-  const content = req.body
+  const reviewId = req.body.reviewId;
+  const content = req.body.content;
 
   const review = await db.Review.findByPk(reviewId)
     review.content = content;
