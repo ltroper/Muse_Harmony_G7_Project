@@ -8,74 +8,173 @@ const db = require("../db/models");
 
 const router = express.Router();
 
-router.get("/", csrfProtection, requireAuth, asyncHandler (async (req, res) => {
-  //generate a list showing all libraries
+router.get(
+  "/",
+  csrfProtection,
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    //generate a list showing all libraries
 
+    //provides all albums in a library
+    const { userId } = req.session.auth;
+    const user = await db.User.findOne({
+      where: { id: userId },
+    });
 
-  const libraryList = await db.AlbumLibrary.findAll()
+    //find all albums a user has added to a library
+    const libraryList = await db.AlbumLibrary.findAll({
+      where: {
+        userId,
+      },
+    });
 
-  res.render("libraryList", {libraryList});
-}))
+    // console.log(libraryList[0]);
 
-router.get("/:name", csrfProtection, requireAuth, asyncHandler (async (req, res, next) => {
-  //genenerate a library showing a list of albums
-
-  const { userId } = req.session.auth;
-  const user = await db.User.findOne({
-    where: { id: userId },
-  });
-
-  const libraryName = req.params.name
-
-  // console.log(typeof(libraryName));
-  let libArr = libraryName.split(' ');
-  const name = libArr.join('-');
-
-  // const userLibrary = await db.AlbumLibrary.findAll({
-  //   where: {name: `${name}`},
-  // });
-
-  const userLibrary = await db.User.findAll({
-    where: {
-      id: userId,
-    },
-    include: [{
-      model: db.Album,
-      as: "AlbumLibraries",
-      through: {
-        where: {
-          name: `${name}`
-        },
+    //provides unique library names no duplicates
+    const uniqueLists = new Set();
+    const uniqueNameArr = [];
+    for (let i = 0; i < libraryList.length; i++) {
+      let listAlbum = libraryList[i];
+      if (!uniqueLists.has(listAlbum.dataValues.name)) {
+        uniqueLists.add(listAlbum.dataValues.name);
+        uniqueNameArr.push(listAlbum.dataValues.name);
       }
-    }],
+    }
+
+    //iterate through unique names Arr to find albums attached to each library
+
+    let userLibraries = {};
+
+    for (let i = 0; i < uniqueNameArr.length; i++) {
+      let name = uniqueNameArr[i];
+      console.log(uniqueNameArr);
+
+      const albumsList = await db.User.findAll({
+        where: {
+          id: userId,
+        },
+        include: [
+          {
+            model: db.Album,
+            as: "AlbumLibraries",
+            through: {
+              where: {
+                name: `${name}`,
+              },
+            },
+          },
+        ],
+      });
+      console.log(name);
+      userLibraries = { name: albumsList[0].AlbumLibraries };
+    }
+    console.log(userLibraries);
+    // console.log(userLibraries[1][1].dataValues.name);
+
+    res.render("libraryList", { userLibraries, uniqueNameArr });
   })
+);
 
-  console.log(userLibrary);
-  res.render("library", {userLibrary, libraryName, user});
-}));
+router.get(
+  "/:name",
+  csrfProtection,
+  requireAuth,
+  asyncHandler(async (req, res, next) => {
+    //genenerate a library showing a list of albums
 
-const libraryValidator = [
+    const { userId } = req.session.auth;
+    const user = await db.User.findOne({
+      where: { id: userId },
+    });
 
-]
+    const libraryName = req.params.name;
 
-router.post("/library/add", csrfProtection, requireAuth, libraryValidator, asyncHandler(async (req, res)=>{
-  //from the profile page & the library list, click a button and a form will prompt the user to be able to add a library
-  //restrict name to just letters, spaces, and numbers
-  //name in data base has dashes for spaces
+    let libArr = libraryName.split(" ");
+    const name = libArr.join("-");
 
-  res.render("libraryAdd")
-}))
+    const libraryUser = await db.AlbumLibrary.findOne({
+      where: {
+        name,
+      },
+    });
+    // console.log(libraryUser.userId);
 
-router.post("/library/edit", csrfProtection, requireAuth, libraryValidator, asyncHandler(async (req, res)=>{
-  //after clicking on edit (for my own library) I am able to modify the name of the library
+    const userLibrary = await db.User.findAll({
+      where: {
+        id: libraryUser.userId,
+      },
+      include: [
+        {
+          model: db.Album,
+          as: "AlbumLibraries",
+          through: {
+            where: {
+              name: `${name}`,
+            },
+          },
+        },
+      ],
+    });
 
-  res.render("libraryAdd")
-}))
+    // console.log(userLibrary[0].AlbumLibraries);
+    // console.log(userId);
 
-router.post("/library/delete", csrfProtection, requireAuth, asyncHandler(async (req, res)=>{
-  //on my profile page, I can delete my library
+    res.render("library", { userLibrary, libraryName, user });
+  })
+);
 
-  res.render("libraryList")
-}))
+const libraryValidator = [];
+
+router.post(
+  "/library/add",
+  csrfProtection,
+  requireAuth,
+  libraryValidator,
+  asyncHandler(async (req, res) => {
+    //from the profile page & the library list, click a button and a form will prompt the user to be able to add a library
+    //restrict name to just letters, spaces, and numbers
+    //name in data base has dashes for spaces
+
+    const { name } = req.body;
+
+    const newLibrary = await AlbumLibrary.create({
+      name,
+      userId: req.session.user.userId,
+    });
+
+    res.render("libraryAdd");
+  })
+);
+
+router.post(
+  "/library/edit",
+  csrfProtection,
+  requireAuth,
+  libraryValidator,
+  asyncHandler(async (req, res) => {
+    //after clicking on edit (for my own library) I am able to modify the name of the library
+
+    res.render("libraryAdd");
+  })
+);
+
+router.post(
+  "/library/delete",
+  csrfProtection,
+  requireAuth,
+  asyncHandler(async (req, res) => {
+    //on my profile page, I can delete my library
+
+    const library = await AlbumLibraries.findAll({
+      where: {
+        name: libraryName,
+        userId: req.session.user.userId,
+      },
+    });
+    await library.destroy();
+
+    res.render("libraryList");
+  })
+);
 
 module.exports = router;

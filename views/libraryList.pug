@@ -1,14 +1,16 @@
 extends layout.pug
 
 block content
-    p Hello Libraries!
-    table
-        thead
-            tr
-                th Library
-        tbody
-            each library in libraryList
+    h2 Libraries list
+    each libraryName in uniqueNameArr
+        table(class= 'museTable')
+            thead(class)
                 tr
-
-                    td= library.name
-                        a(href=`/libraries/${library.id}`)
+                    th= libraryName
+            tbody
+                each library in userLibraries
+                    td testObjectValue
+                    //- if library.dataValue.name == libraryName
+                    //- each album in library
+                    //-     tr
+                    //-         td= album.name
