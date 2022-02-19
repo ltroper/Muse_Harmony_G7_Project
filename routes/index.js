@@ -8,7 +8,15 @@ const router = express.Router();
 /* GET home page. */
 
 router.get("/", csrfProtection, (req, res) => {
-  console.log(req.csrfToken());
+  // console.log(req.csrfToken());
+    const album = await db.Album.findAll({
+    where: { id: albumId },
+    include: {
+      model:db.Artist
+      },
+      limit: 10,
+    });
+
   res.render("index", {
     csrfToken: req.csrfToken(),
   });
