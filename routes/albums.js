@@ -53,11 +53,6 @@ router.post("/:id", asyncHandler(async (req, res) =>{
 
 router.put("/:id/:reviewId", asyncHandler(async (req, res) => {
 
-    //1. extract reviewId
-    //2. grab new text from req.body
-    //3. update review content in db with new text db.table.update
-    //4. send JSON object message: 'success' (if successful)
-
   const reviewId = req.body.reviewId;
   const content = req.body.content;
 
@@ -67,13 +62,15 @@ router.put("/:id/:reviewId", asyncHandler(async (req, res) => {
     res.json({review})
   }))
 
-//   const {message} = req.body
-//     const tweet = await Tweet.findByPk(req.params.id);
-//     tweet.message = message;
-//     await tweet.save();
-//     res.json({tweet});
-// little change
-// }))
+
+router.delete("/ab/:reviewId", asyncHandler(async (req, res) => {
+  const reviewId = req.params.reviewId;
+  const review = await db.Review.findByPk(reviewId)
+  if (review){
+    await review.destroy();
+    res.json({review})
+  }
+}))
 
 
 
