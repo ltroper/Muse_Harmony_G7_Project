@@ -66,7 +66,7 @@ router.put("/:id/:reviewId", asyncHandler(async (req, res) => {
   }))
 
 
-router.delete("/ab/:reviewId", asyncHandler(async (req, res) => {
+router.delete("/:id/:reviewId", asyncHandler(async (req, res) => {
   const reviewId = req.params.reviewId;
   const review = await db.Review.findByPk(reviewId)
   if (review){

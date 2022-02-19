@@ -7,6 +7,7 @@ append head
 
 block content
     img(src=`${album.albumArt}`)
+    p(class=`hide`)= album.id
     p= `Album name: ${album.name}`
     p= `Artist: ${album.Artist.dataValues.name}`
     p= `Genre: ${album.genre}`
@@ -24,7 +25,7 @@ block content
                 .review-container
                     tr
                         td(id=`content-${review.id}`)=review.content
-                        td(id=`rating-${review.id}`)=review.rating
+                        td(id=`rating-${review.id}`)=(`${review.rating}/10`)
                         td(id=`review-${review.id}`)
                             if locals.userId == review.userId
                                 Button(class="edit-review-button active" id=`edit-${review.id}`) Edit
