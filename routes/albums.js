@@ -51,7 +51,7 @@ router.post("/:id", asyncHandler(async (req, res) =>{
 
 }))
 
-router.post("/:id/reviewId", asyncHandler(async (req, res) => {
+router.put("/:id/reviewId", asyncHandler(async (req, res) => {
 
     //1. extract reviewId
     //2. grab new text from req.body
@@ -61,11 +61,19 @@ router.post("/:id/reviewId", asyncHandler(async (req, res) => {
   const reviewId = req.reviewId;
   const content = req.body
 
-  db.Review.update({
+  await db.Review.findByPk(reviewId)({
     where: {
       id: reviewId
-    }
+    },
+    body: {content}
   })
+
+//   const {message} = req.body
+//     const tweet = await Tweet.findByPk(req.params.id);
+//     tweet.message = message;
+//     await tweet.save();
+//     res.json({tweet});
+// }))
 
 
 }))

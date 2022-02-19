@@ -38,11 +38,10 @@ Array.from(editReviewButtons).forEach((editButton) => {
         tableEle.innerHTML = `<textarea id=textarea-${elementId}>${reviewText}</textarea>`
 
         changeButtons(e)
-        console.log(submitButton[0])
 
         Array.from(submitButton).forEach((singleSubmit) => {
 
-            singleSubmit.addEventListener("click", e => {
+            singleSubmit.addEventListener("click", async (e) => {
                 const submitId =e.target.id.split("-")[1];
                 const content = document.getElementById(`textarea-${submitId}`).value
                 console.log(content)
