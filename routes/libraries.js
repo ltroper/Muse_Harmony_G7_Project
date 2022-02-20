@@ -69,14 +69,19 @@ router.get(
       userLibraries.push(obj);
     }
     console.log(userLibraries[0]);
-    // console.log(userLibraries[0]['test-library3'][0]['name']);
-    // console.log(userLibraries[0]['test-library3'][0]['albumArt']);
 
-    // console.log(userLibraries[1][1].dataValues.name);
-
-    res.render("libraryList", { userLibraries, uniqueNameArr });
+    res.render("libraryList", { userLibraries, uniqueNameArr, userId });
   })
 );
+
+router.get('/add', csrfProtection, requireAuth, asyncHandler( (req, res) => {
+  const library = db.AlbumLibrary.build();
+  res.render('libraryAdd', {
+    title: 'Add library',
+    library,
+    csrfToken: req.csrfToken(),
+  });
+}));
 
 router.get(
   "/:name",
@@ -201,6 +206,28 @@ router.post("/:name", asyncHandler (async (req, res) => {
   }
 
 
+}))
+
+router.delete("/:name", asyncHandler(async (req, res) => {
+  const name = req.params.name;
+  const userId = res.locals.userId;
+
+  // console.log(`NAME: ${name}`)
+
+  const library = await db.AlbumLibrary.findAll({
+    where: {
+      name,
+      userId
+    }
+  })
+  if (library){
+    for (let i = 0; i < library.length; i++){
+      await library[i].destroy()
+    }
+    // res.json({library})
+    console.log("redirecting")
+    res.redirect("/libraries")
+  }
 }))
 
 module.exports = router;

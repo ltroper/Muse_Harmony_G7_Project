@@ -11,8 +11,6 @@ Array.from(addToLibraryButtons).forEach((addButton) => {
         const cancel = document.getElementById(`cancel-${addId}`)
         const success = document.getElementById(`success-${addId}`)
 
-        const defaultOption = document.getElementById("default")
-
         tableEle.className = "addToLibrary hidden"
         oneDropDown.className = "dropDown active"
         cancel.className = "cancel active"

@@ -1,13 +1,17 @@
 extends layout.pug
 
+append head
+    script(src="/javascripts/library.js" type="module")
+
 block content
-    h2= libraryName
+    p(class= "hidden" id="userId")= userId
+    h2(id="libraryName")= libraryName
     p line break
     p line break
     p line break
     p line break
-    form(class='editProfile' action='/library/:id' method='post')
-        button(type='submit') Remove Library
+    a(href="/albums")
+        button(id= "removeLibraryButton" type='submit') Remove Library
 
     table
         thead
@@ -18,7 +22,7 @@ block content
         tbody
             each album in albumList
                 tr
-                    td= album.dataValues.name
+                    td(class="albumName")= album.dataValues.name
                     td
                         img(src=`${album.dataValues.albumArt}`)
                     td= album.dataValues.albumId

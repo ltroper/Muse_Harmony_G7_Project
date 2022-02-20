@@ -19,7 +19,8 @@ block content
                             td(class="library-Name")= key
                                 form(class='editProfile' action=`/libraries/${key}/` method='get')
                                     button(type='submit') visit list
-                            td= list[0]['name']
-                            td
-                                a(href=`/libraries/${key}/`)
-                                    img(src=`${list[0]['albumArt']}`)
+                            if library
+                                td= list[0]['name']
+                                td
+                                    a(href=`/libraries/${key}/`)
+                                        img(src=`${list[0]['albumArt']}`)
