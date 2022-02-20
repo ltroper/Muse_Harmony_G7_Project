@@ -25,7 +25,6 @@ block content
                     td(class="albumName")= album.dataValues.name
                     td
                         img(src=`${album.dataValues.albumArt}`)
-                    td= album.dataValues.albumId
+                    td
                         if locals.userId == user.id
-                            form(class='editProfile' action='/libraries/:id/albums/:id/' method='post')
-                                button(type='submit') Remove Album
+                            button(class="removeAlbum" id=`album-${album.dataValues.id}`) Remove Album
