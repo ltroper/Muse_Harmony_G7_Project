@@ -23,7 +23,7 @@ block content
                             button(class="addToLibrary active" id=`album-${album.id}`) Add To Library
                             button(class="cancel hidden" id=`cancel-${album.id}`) Cancel
                             select(class="dropDown hidden" id=`dropDown-${album.id}`)
-                                option(selected='selected')
+                                option(id= "default" selected='selected')
                                 each name in libraryNames
                                     option= name
                             p(class="success hidden" id=`success-${album.id}`) Added to Library!

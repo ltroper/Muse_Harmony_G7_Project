@@ -184,12 +184,23 @@ router.post(
 router.post("/:name", asyncHandler (async (req, res) => {
   const {name, userId, albumId} = req.body
 
-  const newLibrary = await db.AlbumLibrary.create({
-    name,
+  const test = await db.AlbumLibrary.findOne({
+    where: {
+      name,
     userId,
     albumId
-  });
-  res.json({newLibrary})
+    }
+  })
+  if (!test){
+    const newLibrary = await db.AlbumLibrary.create({
+      name,
+      userId,
+      albumId
+    });
+    res.json({newLibrary})
+  }
+
+
 }))
 
 module.exports = router;
