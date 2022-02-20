@@ -77,8 +77,8 @@ Array.from(editReviewButtons).forEach((editButton) => {
                 const submitId =e.target.id.split("-")[1];
                 const content = document.getElementById(`textarea-${submitId}`).value
                 const rating = document.getElementById(`numInput-${submitId}`).value
-                console.log(content)
-                //fix ab for the album id
+
+
                 const fetchResponse = await fetch(`/albums/${albumId.innerText}/${submitId}`, {
                     method: "PUT",
                     headers: {
@@ -98,13 +98,10 @@ Array.from(editReviewButtons).forEach((editButton) => {
                       const newRating = document.getElementById(`rating-${submitId}`);
                       newRating.innerText = data.review.rating;
                       changeButtonsBack(e)
-
                   }
-
-
-
             })
         })
+        
         Array.from(cancelButton).forEach((singleCancel) => {
             singleCancel.addEventListener("click", async (e) => {
                 const cancelId =e.target.id.split("-")[1];
