@@ -1,0 +1,25 @@
+* {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+    display: block;
+}
+
+nav {
+    display: block;
+    background-color: #717171;
+}
+
+.navbar {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    justify-content: flex-end;
+    text-align: center;
+}
+
+.middleColumn p {
+    
+}

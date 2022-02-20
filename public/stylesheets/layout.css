@@ -1,7 +1,6 @@
 nav {
   display: block;
-  position: absolute;
-  z-index: 30;
+  background-color: #717171;
 }
 
 .navbar {

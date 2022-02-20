@@ -1,34 +1,37 @@
 extends layout.pug
 
 block content
-    h2= user.username
-    img(src=`${user.profilePicture}`)
-    p= user.biography
-    if locals.userId == user.id
-        form(class='editProfile' action='/users/editProfile' method='post')
-            button(type='submit') Edit Profile
-    table
-        thead
-            tr
-                th(scope='col') Liked Albums
-        tbody
-            each album in albums
-                tr
-                    td= album.dataValues.name
-    table
-        thead
-            tr
-                th(scope='col') Reviews
-        tbody
-            each review in reviews
-                tr
-                    td= review.dataValues.name
-                    td= review.dataValues.Review.content
-    table
-        thead
-            tr
-                th(scope='col') Album Libraries
-        tbody
-            each library in libraryNames
-                tr
-                    td= library
+    body
+        .mainProfileContainer
+            .main
+                .leftColumn
+                    p= user.username
+                    img(src=`${user.profilePicture}`)
+                .middleColumn
+                    p= user.biography
+                    table
+                        thead
+                            tr
+                                th(scope='col') Liked Albums
+                        tbody
+                            each album in albums
+                                tr
+                                    td= album.dataValues.name
+                    table
+                        thead
+                            tr
+                                th(scope='col') Reviews
+                        tbody
+                            each review in reviews
+                                tr
+                                    td= review.dataValues.name
+                                    td= review.dataValues.Review.content
+                    table
+                        thead
+                            tr
+                                th(scope='col') Album Libraries
+                        tbody
+                            each library in libraryNames
+                                tr
+                                    td= library
+            .rightColumn
