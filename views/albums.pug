@@ -5,25 +5,26 @@ append head
     script(src="/javascripts/allAlbums.js" type="module")
 
 block content
-    p(class= "hidden" id="userId")= userId
-    table
-        thead
-            tr
-                th Albums
-        tbody
-            each album in albums
+    div.albums-container
+        p(class= "hidden" id="userId")= userId
+        table.album-table
+            thead
                 tr
-                    td
-                        a(href=`/albums/${album.id}`)
-                            img(src=`${album.albumArt}`)
+                    th.album-tableHead Albums
+            tbody
+                each album in albums
+                    tr
+                        td.album-art
+                            a(href=`/albums/${album.id}`)
+                                img(src=`${album.albumArt}`)
 
-                    td= album.name
-                    td
-                        if (locals.userId)
-                            button(class="addToLibrary active" id=`album-${album.id}`) Add To Library
-                            button(class="cancel hidden" id=`cancel-${album.id}`) Cancel
-                            select(class="dropDown hidden" id=`dropDown-${album.id}`)
-                                option(id= "default" selected='selected')
-                                each name in libraryNames
-                                    option= name
-                            p(class="success hidden" id=`success-${album.id}`) Added to Library!
+                        td.album-name= album.name
+                        td
+                            if (locals.userId)
+                                button(class="addToLibrary" id=`album-${album.id}`) Add To Library
+                                button(class="cancel hidden" id=`cancel-${album.id}`) Cancel
+                                select(class="dropDown hidden" id=`dropDown-${album.id}`)
+                                    option(id= "default" selected='selected') My Libraries
+                                    each name in libraryNames
+                                        option= name
+                                p(class="success hidden" id=`success-${album.id}`) Added to Library!
