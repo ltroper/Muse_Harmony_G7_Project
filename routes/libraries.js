@@ -43,11 +43,10 @@ router.get(
 
     //iterate through unique names Arr to find albums attached to each library
 
-    let userLibraries = {};
+    let userLibraries = [];
 
     for (let i = 0; i < uniqueNameArr.length; i++) {
       let name = uniqueNameArr[i];
-      console.log(uniqueNameArr);
 
       const albumsList = await db.User.findAll({
         where: {
@@ -65,10 +64,14 @@ router.get(
           },
         ],
       });
-      console.log(name);
-      userLibraries = { name: albumsList[0].AlbumLibraries };
+      let obj = {}
+      obj[name] =  albumsList[0].AlbumLibraries
+      userLibraries.push(obj);
     }
-    console.log(userLibraries);
+    console.log(userLibraries[0]);
+    // console.log(userLibraries[0]['test-library3'][0]['name']);
+    // console.log(userLibraries[0]['test-library3'][0]['albumArt']);
+
     // console.log(userLibraries[1][1].dataValues.name);
 
     res.render("libraryList", { userLibraries, uniqueNameArr });
@@ -116,10 +119,11 @@ router.get(
       ],
     });
 
-    // console.log(userLibrary[0].AlbumLibraries);
+    console.log(userLibrary[0].AlbumLibraries);
     // console.log(userId);
+    const albumList = userLibrary[0].AlbumLibraries;
 
-    res.render("library", { userLibrary, libraryName, user });
+    res.render("library", { albumList, libraryName, user });
   })
 );
 
