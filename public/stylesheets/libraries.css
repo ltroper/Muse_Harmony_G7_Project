@@ -1,3 +1,32 @@
 .hidden {
     visibility: hidden;
 }
+
+img {
+    border-radius: 50%;
+}
+
+h2 {
+    font-size: 24px;
+    color: #333333;
+}
+
+.library-Name {
+    color: #333333;
+}
+
+.gap-container {
+    display: flex;
+    margin: 5px 5px 5px 25px;
+    height: 75px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.library-container {
+    display: flex;
+    margin: 5px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
