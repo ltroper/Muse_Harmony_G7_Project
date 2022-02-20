@@ -21,6 +21,8 @@ block content
                         td.album-name= album.name
                         td
                             if (locals.userId)
+                                form(action=`/libraries/add/${album.id}` method="GET")
+                                    button Create new Library with Album
                                 button(class="addToLibrary" id=`album-${album.id}`) Add To Library
                                 button(class="cancel hidden" id=`cancel-${album.id}`) Cancel
                                 select(class="dropDown hidden" id=`dropDown-${album.id}`)

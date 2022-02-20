@@ -74,12 +74,12 @@ router.get(
   })
 );
 
-router.get('/add', csrfProtection, requireAuth, asyncHandler( (req, res) => {
-  const library = db.AlbumLibrary.build();
+router.get('/add/:albumId', csrfProtection, requireAuth, asyncHandler( (req, res) => {
+  const albumId = req.params.albumId;
   res.render('libraryAdd', {
     title: 'Add library',
-    library,
     csrfToken: req.csrfToken(),
+    albumId
   });
 }));
 
@@ -132,26 +132,25 @@ router.get(
   })
 );
 
-const libraryValidator = [];
 
 router.post(
-  "/library/add",
+  "/add/:albumId",
   csrfProtection,
   requireAuth,
-  libraryValidator,
   asyncHandler(async (req, res) => {
     //from the profile page & the library list, click a button and a form will prompt the user to be able to add a library
     //restrict name to just letters, spaces, and numbers
     //name in data base has dashes for spaces
+    const albumId = req.params.albumId
+    const name = req.body.libraryName;
 
-    const { name } = req.body;
-
-    const newLibrary = await AlbumLibrary.create({
+    const newLibrary = await db.AlbumLibrary.create({
       name,
-      userId: req.session.user.userId,
+      userId: res.locals.userId,
+      albumId
     });
 
-    res.render("libraryAdd");
+    res.redirect(`/libraries`);
   })
 );
 
@@ -159,7 +158,6 @@ router.post(
   "/library/edit",
   csrfProtection,
   requireAuth,
-  libraryValidator,
   asyncHandler(async (req, res) => {
     //after clicking on edit (for my own library) I am able to modify the name of the library
 
@@ -228,6 +226,24 @@ router.delete("/:name", asyncHandler(async (req, res) => {
     console.log("redirecting")
     res.redirect("/libraries")
   }
+}))
+
+router.delete("/:name/:albumId", asyncHandler(async (req, res) => {
+  const name = req.params.name;
+  const userId = res.locals.userId;
+  const albumId = req.params.albumId;
+
+  const album = await db.AlbumLibrary.findOne({
+    where: {
+      name,
+      userId,
+      albumId
+    }
+  })
+  if (album){
+    await album.destroy()
+  }
+  res.json(album)
 }))
 
 module.exports = router;

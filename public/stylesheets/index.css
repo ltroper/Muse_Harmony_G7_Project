@@ -3,8 +3,6 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
-
-
 header {
   display: block;
 }
@@ -43,7 +41,6 @@ body {
   overflow-x: none;
 }
 
-
 .logo {
   padding: 3px 20px;
 }
@@ -59,11 +56,9 @@ body {
   flex-direction: column;
 }
 
-
-
 .albums-container {
   display: flex;
-
+  justify-content: center;
 }
 
 .albumList {
