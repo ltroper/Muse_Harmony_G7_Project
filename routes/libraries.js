@@ -181,4 +181,15 @@ router.post(
   })
 );
 
+router.post("/:name", asyncHandler (async (req, res) => {
+  const {name, userId, albumId} = req.body
+
+  const newLibrary = await db.AlbumLibrary.create({
+    name,
+    userId,
+    albumId
+  });
+  res.json({newLibrary})
+}))
+
 module.exports = router;

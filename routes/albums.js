@@ -10,8 +10,22 @@ const bcrypt = require("bcryptjs");
 
 router.get("/", requireAuth, async (req, res) => {
     const albums = await db.Album.findAll()
+    const userId = res.locals.userId
 
-    res.render("albums", {albums})
+    const userLibraries = await db.AlbumLibrary.findAll({
+      where: {
+        userId
+      }
+    })
+    const libraryNamesSet = new Set()
+    for (let i = 0; i < userLibraries.length; i++){
+      libraryNamesSet.add(userLibraries[i].name)
+    }
+
+    const libraryNames = Array.from(libraryNamesSet)
+
+
+    res.render("albums", {albums, libraryNames, userId})
 })
 
 
@@ -36,10 +50,10 @@ router.get("/:id", requireAuth, asyncHandler (async (req, res) => {
 }));
 
 router.post("/:id", asyncHandler(async (req, res) =>{
-    const content = req.body.review;
-    const userId = res.locals.userId;
-    const albumId = req.params.id;
-    const rating = req.body.rating;
+  const userId = res.locals.userId;
+  const albumId = req.params.id;
+  const rating = req.body.rating;
+  const content = req.body.review;
 
     await db.Review.create({
       content,
@@ -47,6 +61,7 @@ router.post("/:id", asyncHandler(async (req, res) =>{
       albumId,
       userId
     })
+
     res.redirect(`/albums/${albumId}`)
 
 
