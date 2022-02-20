@@ -230,4 +230,22 @@ router.delete("/:name", asyncHandler(async (req, res) => {
   }
 }))
 
+router.delete("/:name/:albumId", asyncHandler(async (req, res) => {
+  const name = req.params.name;
+  const userId = res.locals.userId;
+  const albumId = req.params.albumId;
+
+  const album = await db.AlbumLibrary.findOne({
+    where: {
+      name,
+      userId,
+      albumId
+    }
+  })
+  if (album){
+    await album.destroy()
+  }
+  res.json(album)
+}))
+
 module.exports = router;
