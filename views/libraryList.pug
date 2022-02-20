@@ -2,15 +2,19 @@ extends layout.pug
 
 block content
     h2 Libraries list
-    each libraryName in uniqueNameArr
+    p 1
+    p 2
+    p 3
+    p 4
+    p 5
+
+    each library in userLibraries
         table(class= 'museTable')
             thead(class)
                 tr
-                    th= libraryName
+                    th= library.key
             tbody
-                each library in userLibraries
-                    td testObjectValue
-                    //- if library.dataValue.name == libraryName
-                    //- each album in library
-                    //-     tr
-                    //-         td= album.name
+                each album in library
+                    td= (`${album[library.key][0][`name`]}`)
+                    td
+                        img(src= `${album[library.key][0][`albumArt`]}`)
