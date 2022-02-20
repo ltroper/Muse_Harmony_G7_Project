@@ -68,7 +68,10 @@ router.get(
       obj[name] =  albumsList[0].AlbumLibraries
       userLibraries.push(obj);
     }
-    console.log(userLibraries[0]['test-library3'][0]['name']);
+    console.log(userLibraries[0]);
+    // console.log(userLibraries[0]['test-library3'][0]['name']);
+    // console.log(userLibraries[0]['test-library3'][0]['albumArt']);
+
     // console.log(userLibraries[1][1].dataValues.name);
 
     res.render("libraryList", { userLibraries, uniqueNameArr });
