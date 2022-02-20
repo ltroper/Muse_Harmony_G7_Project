@@ -1,31 +1,25 @@
 extends layout.pug
 
+append head
+    link(rel="stylesheet" href="/stylesheets/libraries.css")
+    script(src="/javascripts/libraries.js" type="module")
+
 block content
-    p 1 line break
-    p 1 line break
-    p 1 line break
-    p 1 line break
-    p 1 line break
+    div#app
+        div.gap-container
+            h2 Libraries list
 
-    h2 Libraries list
+        .library-container
+            each library in userLibraries
+                table
+                    thead
 
-    p 1 line break
-    p 1 line break
-    p 1 line break
-    p 1 line break
-    p 1 line break
-
-    each library in userLibraries
-        table
-            thead
-
-            tbody
-                each list, key in library
-                    td Library Name
-                    td= key
-                        form(class='editProfile' action='/libraries/:id' method='get')
-                            button(type='submit') visit list
-                    td= list[0]['name']
-                    td
-                        a(href='/library/:id')
-                            img(src=`${list[0]['albumArt']}`)
+                    tbody
+                        each list, key in library
+                            td(class="library-Name")= key
+                                form(class='editProfile' action=`/libraries/${key}/` method='get')
+                                    button(type='submit') visit list
+                            td= list[0]['name']
+                            td
+                                a(href=`/libraries/${key}/`)
+                                    img(src=`${list[0]['albumArt']}`)
