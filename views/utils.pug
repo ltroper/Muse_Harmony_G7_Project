@@ -38,6 +38,7 @@ mixin signedOut
                 input(type="password" name="confirmPassword" required)
               div.modal-btn
                 button.submit-btn Submit
+                button Demo User
 
 mixin signedIn
   head
@@ -62,3 +63,7 @@ mixin validationErrorSummary(errors)
       ul
         each error in errors
           li= error
+
+mixin footer
+  .link-container
+    a(href='https://www.linkedin.com/in/nikolas-garza-7a3202139/')

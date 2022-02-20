@@ -2,15 +2,8 @@ extends layout.pug
 include utils.pug
 
 append head
-  //- add page specific styles by appending to the head
-  link(rel="stylesheet" href="/stylesheets/index.css")
-  //- add page specific js
-  script(src="./javascripts/index.js" type="module")
 
 block content
-  head
-
-  body
     div#app
       div.main-container
         .slideshow-container
@@ -41,4 +34,3 @@ block content
                       a(href=`/albums/${album.id}`)
                         img(src=`${album.albumArt}`)
                     td= album.name
-      div.createLinks
