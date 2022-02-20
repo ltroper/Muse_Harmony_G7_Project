@@ -2,14 +2,26 @@ extends layout.pug
 
 block content
     h2= libraryName
+    p line break
+    p line break
+    p line break
+    p line break
+    form(class='editProfile' action='/library/:id' method='post')
+        button(type='submit') Remove Library
+
     table
         thead
             tr
-                th(scope='col') Album Libraries
+                th(scope='col') Album Name
+                th(scope='col') Album Cover
+                th(scope='col') Album Name
         tbody
-            each album in userLibrary
+            each album in albumList
                 tr
+                    td= album.dataValues.name
+                    td
+                        img(src=`${album.dataValues.albumArt}`)
                     td= album.dataValues.albumId
                         if locals.userId == user.id
-                            form(class='editProfile' action='/library/:id' method='post')
-                                button(type='submit') Remove
+                            form(class='editProfile' action='/libraries/:id/albums/:id/' method='post')
+                                button(type='submit') Remove Album

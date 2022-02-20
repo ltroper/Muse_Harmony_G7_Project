@@ -119,10 +119,11 @@ router.get(
       ],
     });
 
-    // console.log(userLibrary[0].AlbumLibraries);
+    console.log(userLibrary[0].AlbumLibraries);
     // console.log(userId);
+    const albumList = userLibrary[0].AlbumLibraries;
 
-    res.render("library", { userLibrary, libraryName, user });
+    res.render("library", { albumList, libraryName, user });
   })
 );
 
