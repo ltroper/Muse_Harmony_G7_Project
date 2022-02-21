@@ -129,19 +129,25 @@ router.post(
   csrfProtection,
   signupValidators,
   asyncHandler(async (req, res) => {
-    const { username, email, password } = req.body;
+    const { id, username, email, password } = req.body;
 
     const user = await db.User.build({
       username,
       email,
     });
+
     const validatorErrors = validationResult(req);
 
     if (validatorErrors.isEmpty()) {
       const hashPassword = await bcrypt.hash(password, 10);
       user.hashPassword = hashPassword;
       await user.save();
-      res.redirect("/");
+      const createdUser = await db.User.findOne({ where: { email } });
+      if (createdUser) {
+        loginUser(req, res, createdUser);
+        const userId = createdUser.id;
+        res.redirect(`/users/${userId}`);
+      }
     } else {
       const errors = validatorErrors.array().map((error) => error.msg);
       res.redirect("/");
@@ -154,6 +160,7 @@ router.post(
 router.get(
   "/:id",
   requireAuth,
+  csrfProtection,
   asyncHandler(async (req, res, next) => {
     const userId = req.params.id;
     const user = await db.User.findOne({
