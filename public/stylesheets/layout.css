@@ -1,22 +1,96 @@
+* {
+  overflow-x: none;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
 nav {
-  display: block;
   background-color: #717171;
 }
 
 .navbar {
   display: flex;
-  flex-direction: row;
   margin: 0;
-  justify-content: flex-end;
   text-align: center;
 }
 
-.logo {
-  flex: 1;
+.buttonsSigned {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
 }
 
-.logo img {
-  float: left;
+.loginDemoCreateButtons {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: row;
+  width: 100%;
+}
+
+button {
+  background-color: #ca8b42;
+  border-radius: 7px;
+  color: rgb(0, 0, 0);
+  margin: 10px;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 10px;
+  display: flex;
+  cursor: pointer;
+  flex-direction: row;
+}
+
+.webName {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  
+  padding: 0 10px;
+
+}
+
+.webName a {
+  font-size: 20px;
+  font-weight: bolder;
+  text-decoration: none;
+}
+
+/* .demo-btn {
+  background-color: #ca8b42;
+  color: rgb(0, 0, 0);
+  margin: 10px;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 10px;
+} */
+
+.login-button {
+  background-color: rgba(0, 0, 0, 0.4);
+  color: rgb(255, 255, 255);
+  margin: 10px;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 10px;
+}
+
+.create-account {
+  background-color: #ca8b42;
+  color: rgb(0, 0, 0);
+  margin: 10px;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 10px;
+  flex-wrap: nowrap;
 }
 
 .modal-container {
@@ -52,10 +126,6 @@ nav {
   width: 80%;
 }
 
-.modal--create-account-inputs {
-  padding: 16px;
-}
-
 /*assign full width inputs*/
 input[type="text"],
 input[type="email"],
@@ -68,7 +138,6 @@ input[type="password"] {
   box-sizing: border-box;
 }
 
-*/
 /* /*set extra style for the cancel button */
 
 .submit-btn {
@@ -104,8 +173,8 @@ input[type="password"] {
 
 img.logo-img {
   position: relative;
-  /* width: 40%; */
-  border-radius: 50%;
+  width: 200px;
+  height: 200px;
 }
 
 .animate {
@@ -125,10 +194,15 @@ img.logo-img {
   font-size: 10px;
 }
 
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+}
+
 .link-container {
   display: flex;
-  flex: 1 1 1;
-  flex-direction: row;
   justify-content: center;
   position: fixed;
   bottom: 0;
@@ -139,6 +213,7 @@ img.logo-img {
 }
 
 .link-container a {
+  border-radius: 5px;
   color: rgb(0, 0, 0);
   margin: 10px;
   padding: 10px 20px;
@@ -149,45 +224,13 @@ img.logo-img {
   background: #ca8b42;
   opacity: 1;
 }
+
 .link-container a:hover {
   opacity: 0.8;
-}
-
-button {
-  background-color: #ca8b42;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 100%;
 }
 
 /* set a hover effect for the button*/
 
 button:hover {
   opacity: 0.8;
-}
-
-.login-button {
-  border-radius: 5px;
-  color: rgb(0, 0, 0);
-  margin: 10px;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 10px;
-}
-
-.create-account {
-  background-color: #ca8b42;
-  border-radius: 5px;
-  color: rgb(0, 0, 0);
-  margin: 10px;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 10px;
 }

@@ -1,5 +1,4 @@
 extends layout.pug
-include utils.pug
 
 append head
   //- add page specific styles by appending to the head
@@ -7,37 +6,36 @@ append head
   //- add page specific js
   script(src="./javascripts/index.js" type="module")
 
-  body
-    div#app
-      div.main-container
-        .slideshow-container
-          .mySlides.fade
-            img(src='/images/banner1.jpg')
-            .text "Music is the language of the spirit. it opens the secret of life bringing peace, abolishing strife."
-              p - Kahlil Gibran
-          .mySlides.fade
-            img(src='/images/banner2.jpg')
-            .text "Music is the literature of the heart; it commences where speech ends."
-              p - Alphonse de Lamartine
-          .mySlides.fade
-            img(src='/images/banner3.jpg')
-            .text "Music is nothing else but wild sounds civilized into time and tune."
-              p - Thomas Fuller
-          // Next and previous buttons
-          a.prev &#x276E;
-          a.next &#x276F;
-        .middleContainer
-          .albums-container
-            p Albums
-            .albumList-container1
-              table
-                thead
+  div#app
+    div.main-container
+      .slideshow-container
+        .mySlides.fade
+          img(src='/images/banner1.jpg')
+          .text "Music is the language of the spirit. it opens the secret of life bringing peace, abolishing strife."
+            p - Kahlil Gibran
+        .mySlides.fade
+          img(src='/images/banner2.jpg')
+          .text "Music is the literature of the heart; it commences where speech ends."
+            p - Alphonse de Lamartine
+        .mySlides.fade
+          img(src='/images/banner3.jpg')
+          .text "Music is nothing else but wild sounds civilized into time and tune."
+            p - Thomas Fuller
+        // Next and previous buttons
+        a.prev &#x276E;
+        a.next &#x276F;
+      .middleContainer
+        .albums-container
+          p Trending Albums
+          .albumList-container1
+            table
+              thead
+                tr
+                  th
+              tbody
+                each album in albums
                   tr
-                    th
-                tbody
-                  each album in albums
-                    tr
-                      td
-                        a(href=`/albums/${album.id}`)
-                          img(src=`${album.albumArt}`)
-                      td= album.name
+                    td
+                      a(href=`/albums/${album.id}`)
+                        img(src=`${album.albumArt}`)
+                    td= album.name

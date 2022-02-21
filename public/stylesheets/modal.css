@@ -36,10 +36,6 @@
   width: 80%;
 }
 
-.modal--create-account-inputs {
-  padding: 16px;
-}
-
 /*assign full width inputs*/
 input[type="text"],
 input[type="email"],
@@ -50,16 +46,6 @@ input[type="password"] {
   display: inline-block;
   border: 1px solid #ccc;
   box-sizing: border-box;
-}
-
-button {
-  background-color: #ca8b42;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 100%;
 }
 
 /* set a hover effect for the button*/

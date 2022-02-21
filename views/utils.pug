@@ -1,10 +1,14 @@
 mixin signedOut
-  head
+  header
     nav
       .navbar
-        .logo
-          img.logo-img(src='./images/muse.png' alt='Logo of Muse' width=60 height=60)
-        button.login-button.modal-show(onclick="document.getElementById('modal-login').style.display='block'") Login
+        .webName
+          a(href= "/") MUSE HARMONY
+        .loginDemoCreateButtons
+          button.login-button.modal-show(onclick="document.getElementById('modal-login').style.display='block'") Login
+          button.create-account.modal-show(onclick="document.getElementById('modal').style.display='block'") Create account
+          button.demo-btn Demo User
+        //- vvv Login Modal vvv -//
         div.modal-container#modal-login
           form.modal-form(action="/users/login" method="POST")
             span.close-btn(onclick="document.getElementById('modal-login').style.display='none'")
@@ -19,8 +23,8 @@ mixin signedOut
               input(type="password" name="password" required)
             div.modal-btn
               button.submit-btn Submit
-        button.create-account.modal-show(onclick="document.getElementById('modal').style.display='block'") Create account
-        div.modal-container#modal
+        //- vvv Create Account Modal vvv -//
+        div.modal-container#modal-create
           form.modal-form(action="/users/signup" method="POST")
             span.close-btn(onclick="document.getElementById('modal').style.display='none'")
               i(class="fa-solid fa-rectangle-xmark")
@@ -38,22 +42,22 @@ mixin signedOut
               input(type="password" name="confirmPassword" required)
             div.modal-btn
               button.submit-btn Submit
-        button.demo-btn Demo User
+
 
 mixin signedIn
-  head
+  header
     nav
       .navbar
-          .logo
-            a(href= "/")
-              img.logo-img(src='./images/muse.png' alt='Logo of Muse' width=60 height=60 )
-          form(class='logout' action='/albums' method='get')
+        .webName
+          a(href= "/") MUSE HARMONY
+        .buttonsSigned
+          form(action='/albums' method='get')
               button(type='submit') Albums
-          form(class='logout' action='/libraries' method='get')
+          form(action='/libraries' method='get')
               button(type='submit') Libraries
-          form(class='logout' action=`/users/${locals.userId}` method='get')
+          form(action=`/users/${locals.userId}` method='get')
               button(type='submit') My Profile
-          form(class='logout' action='/users/logout' method='post')
+          form(action='/users/logout' method='post')
               button(type='submit') Logout
 
 mixin validationErrorSummary(errors)
