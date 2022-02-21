@@ -21,10 +21,7 @@ body {
   margin:0;
   padding:0;
   height:100%;
-}
-
-.logo {
-  padding: 3px 20px;
+  background-color: antiquewhite;
 }
 
 .main-container {
@@ -33,34 +30,32 @@ body {
   flex-direction: column;
 }
 
-.middleContainer {
+.page-container {
+  display: flex;
+  width: 1000px;
+  margin: auto auto;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
-  display: flex;
-  margin:0;
+  background-color: white;
+  font-size: 40px;
+  font-weight: bold;
 }
 
-.albums-container {
-  display: flex;
-  justify-content: flex-start;
-  position: relative;
-  right: 130px;
-  margin: 0;
+.album-table {
+  background-color: white;
+  padding: 10px 10px;
 }
 
-.albums-container p {
-  position: relative;
-  font-size: 17px;
-  left: 30%;
+.album-tableHead {
+  padding: 10px;
+  font-size: 30px;
+  justify-content: center;
 }
-
-.albumList-container1 {
-  position: relative;
-  top: 50px;
-  left: 250px;
-}
-
-.albumList-container1 img {
-  border-radius: 10px;
+.album-name {
+  padding: 10px;
+  font-size: 20px;
+  justify-content: center;
 }
 
 /* vvv Slides vvv */

@@ -50,7 +50,7 @@ nav {
   flex-direction: row;
   width: 100%;
   align-items: center;
-  /* padding-top: 13px; */
+  padding: 0 10px;
 }
 
 .demo-btn {
