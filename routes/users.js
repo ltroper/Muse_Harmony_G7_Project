@@ -129,11 +129,12 @@ router.post(
   csrfProtection,
   signupValidators,
   asyncHandler(async (req, res) => {
-    const { id, username, email, password } = req.body;
+    const { username, email, password } = req.body;
 
     const user = await db.User.build({
       username,
       email,
+      profilePicture: "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/250.jpg"
     });
 
     const validatorErrors = validationResult(req);
