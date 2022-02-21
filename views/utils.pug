@@ -2,8 +2,7 @@ mixin signedOut
   header
     nav
       .navbar
-        .logo
-          img.logo-img(src='./images/muse.png' alt='Logo of Muse' width=60 height=60)
+        a.muse-harmony(href='/') Muse Harmony
         button.login-button.modal-show(onclick="document.getElementById('modal-login').style.display='block'") Login
         div.modal-container#modal-login
           form.modal-form(action="/users/login" method="POST")
@@ -44,24 +43,21 @@ mixin signedOut
               button.submit-btn Submit
         form.demo-btn(action='/users/demo' method='post')
           input(type="hidden" name="_csrf" value=csrfToken)
-          button.demo-btn(type='submit') Demo User
+          button(type='submit') Demo User
 
 mixin signedIn
   header
     nav
       .navbar
-          .logo
-            a(href= "/")
-              img.logo-img(src='./images/muse.png' alt='Logo of Muse' width=60 height=60 )
-          div Muse Harmony
-          form(class='logout' action='/albums' method='get')
-              button(type='submit') Albums
-          form(class='logout' action='/libraries' method='get')
-              button(type='submit') Libraries
-          form(class='logout' action=`/users/${locals.userId}` method='get')
-              button(type='submit') My Profile
-          form(class='logout' action='/users/logout' method='post')
-              button(type='submit') Logout
+        a.muse-harmony(href='/') Muse Harmony
+        form.signedIn-button(class='logout' action='/albums' method='get')
+            button(type='submit') Albums
+        form.signedIn-button(class='logout' action='/libraries' method='get')
+            button(type='submit') Libraries
+        form.signedIn-button(class='logout' action=`/users/${locals.userId}` method='get')
+            button(type='submit') My Profile
+        form.signedIn-button(class='logout' action='/users/logout' method='post')
+            button(type='submit') Logout
 
 mixin validationErrorSummary(errors)
   if errors

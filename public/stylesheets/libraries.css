@@ -1,32 +1,52 @@
 .hidden {
-    visibility: hidden;
+  visibility: hidden;
 }
 
 img {
-    border-radius: 50%;
+  border-radius: 50%;
+}
+
+body {
+  background-color: antiquewhite;
 }
 
 h2 {
-    font-size: 24px;
-    color: #333333;
+  font-size: 24px;
+  color: #333333;
 }
 
 .library-Name {
-    color: #333333;
+  color: #333333;
+  padding: 10px;
+  font-size: 35px;
+  justify-content: center;
+  align-items: center;
 }
 
 .gap-container {
-    display: flex;
-    margin: 5px 5px 5px 25px;
-    height: 75px;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  margin: 5px 5px 5px 25px;
+  height: 75px;
+  flex-direction: column;
+  align-items: center;
 }
 
 .library-container {
-    display: flex;
-    margin: 5px;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+  display: flex;
+  width: 1000px;
+  margin: auto auto;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: white;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.table-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.visit-list-btn {
 }

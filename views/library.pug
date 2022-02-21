@@ -22,9 +22,9 @@ block content
         tbody
             each album in albumList
                 tr
-                    td(class="albumName")= album.dataValues.name
                     td
                         img(src=`${album.dataValues.albumArt}`)
+                    td(class="albumName")= album.dataValues.name
                     td
                         if locals.userId == user.id
                             button(class="removeAlbum" id=`album-${album.dataValues.id}`) Remove Album

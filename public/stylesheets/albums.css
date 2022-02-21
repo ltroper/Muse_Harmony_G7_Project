@@ -1,11 +1,21 @@
+img {
+  border-radius: 5%;
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+}
 .hidden {
   visibility: hidden;
+}
+
+body {
+  background-color: antiquewhite;
 }
 
 .albums-container {
   width: 1000px;
   margin: auto auto;
-  background-color: antiquewhite;
+  background-color: rgb(252, 252, 252);
 }
 
 .album-table {
@@ -15,14 +25,19 @@
 .album-tableHead {
   padding: 10px;
   font-size: 40px;
+  justify-content: center;
 }
 .album-name {
   padding: 10px;
-  font-size: 40px;
+  font-size: 35px;
+  justify-content: center;
 }
 
-img {
-  border-radius: 50%;
+.btn-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 button,
@@ -52,4 +67,7 @@ button:hover {
   border: none;
   cursor: pointer;
   width: 100%;
+}
+
+.success {
 }

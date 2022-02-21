@@ -20,19 +20,13 @@ nav {
   text-align: center;
 }
 
-.logo {
-  flex: 1;
+a img {
+  border-radius: 5%;
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  border: rgb(0, 0, 0);
 }
-
-.logo img {
-  float: left;
-}
-
-/* .logo a {
-  position: absolute;
-  left: 0px;
-  top: 0px;
-} */
 
 body {
   margin: 0;
@@ -47,7 +41,7 @@ body {
 
 #app {
   display: block;
-  z-index: 0;
+  height: fit-content
 }
 
 .main-container {
