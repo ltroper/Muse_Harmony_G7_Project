@@ -234,3 +234,43 @@ footer {
 button:hover {
   opacity: 0.8;
 }
+
+.login-button {
+  border-radius: 5px;
+  color: rgb(0, 0, 0);
+  margin: 10px;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 10px;
+}
+
+.create-account {
+  background-color: #ca8b42;
+  border-radius: 5px;
+  color: rgb(0, 0, 0);
+  margin: 10px;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 10px;
+}
+.demo-btn {
+  background-color: #ca8b42;
+  border-radius: 5px;
+  color: rgb(0, 0, 0);
+  margin: 10px;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 10px;
+}
+
+.muse-harmony {
+  align-self: center;
+  justify-content: flex-end;
+}
+

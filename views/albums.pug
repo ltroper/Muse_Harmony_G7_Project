@@ -10,19 +10,22 @@ block content
         table.album-table
             thead
                 tr
-                    th.album-tableHead Albums
+                    th.album-tableHead
+                    th.album-tableHead Album Name
+                    th.album-tableHead Artist
             tbody
                 each album in albums
-                    tr
+                    tr.row-container
                         td.album-art
                             a(href=`/albums/${album.id}`)
                                 img(src=`${album.albumArt}`)
 
                         td.album-name= album.name
-                        td
+                        td.album-name= album.Artist.name
+                        td.btn-container
                             if (locals.userId)
                                 form(action=`/libraries/add/${album.id}` method="GET")
-                                    button Create new Library with Album
+                                    button.new-library-btn Create new Library with Album
                                 button(class="addToLibrary" id=`album-${album.id}`) Add To Library
                                 button(class="cancel hidden" id=`cancel-${album.id}`) Cancel
                                 select(class="dropDown hidden" id=`dropDown-${album.id}`)

@@ -48,6 +48,7 @@ router.get(
     for (let i = 0; i < uniqueNameArr.length; i++) {
       let name = uniqueNameArr[i];
 
+
       const albumsList = await db.User.findAll({
         where: {
           id: userId,
@@ -68,7 +69,6 @@ router.get(
       obj[name] =  albumsList[0].AlbumLibraries
       userLibraries.push(obj);
     }
-    console.log(userLibraries[0]);
 
     res.render("libraryList", { userLibraries, uniqueNameArr, userId });
   })
@@ -127,8 +127,9 @@ router.get(
     console.log(userLibrary[0].AlbumLibraries);
     // console.log(userId);
     const albumList = userLibrary[0].AlbumLibraries;
-
-    res.render("library", { albumList, libraryName, user });
+    const nameNoDashesArr = name.split("-")
+    const nameToPass = nameNoDashesArr.join(" ")
+    res.render("library", { albumList, nameToPass, user });
   })
 );
 
@@ -142,7 +143,9 @@ router.post(
     //restrict name to just letters, spaces, and numbers
     //name in data base has dashes for spaces
     const albumId = req.params.albumId
-    const name = req.body.libraryName;
+    const unfactoredName = req.body.libraryName;
+    const libArray = unfactoredName.split(" ")
+    const name = libArray.join("-")
 
     const newLibrary = await db.AlbumLibrary.create({
       name,

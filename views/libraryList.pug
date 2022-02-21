@@ -5,23 +5,19 @@ append head
     script(src="/javascripts/libraries.js" type="module")
 
 block content
-    div#app
-        div.gap-container
-            h2 Libraries list
-
-        .library-container
-            a(class='' href='/libraries/add' role='button') Add Custom Library
+    .library-container My Libraries
+        .table-container
             each library in userLibraries
                 table
                     thead
 
                     tbody
                         each list, key in library
-                            td(class="library-Name")= key
-                                form(class='editProfile' action=`/libraries/${key}/` method='get')
-                                    button(type='submit') visit list
                             if library
-                                td= list[0]['name']
                                 td
                                     a(href=`/libraries/${key}/`)
                                         img(src=`${list[0]['albumArt']}`)
+                            td(class="library-Name")= key
+                            td.visit-list-btn
+                                form(class='editProfile' action=`/libraries/${key}/` method='get')
+                                    button(type='submit') visit list

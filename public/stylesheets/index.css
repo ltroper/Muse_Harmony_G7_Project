@@ -8,6 +8,14 @@ header {
   min-height:50px
 }
 
+a img {
+  border-radius: 5%;
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  border: rgb(0, 0, 0);
+}
+
 body {
   min-height: calc(100vh - 60px);
   margin:0;
@@ -18,7 +26,6 @@ body {
 .logo {
   padding: 3px 20px;
 }
-
 
 .main-container {
   display: flex;

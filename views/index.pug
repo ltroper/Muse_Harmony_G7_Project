@@ -6,6 +6,7 @@ append head
   //- add page specific js
   script(src="./javascripts/index.js" type="module")
 
+block content
   div#app
     div.main-container
       .slideshow-container
@@ -26,16 +27,18 @@ append head
         a.next &#x276F;
       .middleContainer
         .albums-container
-          p Trending Albums
           .albumList-container1
-            table
+            table.album-table
               thead
-                tr
-                  th
-              tbody
-                each album in albums
                   tr
-                    td
-                      a(href=`/albums/${album.id}`)
-                        img(src=`${album.albumArt}`)
-                    td= album.name
+                      th.album-tableHead
+                      th.album-tableHead Album Name
+                      th.album-tableHead Artist
+              tbody
+                  each album in albums
+                      tr
+                          td.album-art
+                              a(href=`/albums/${album.id}`)
+                                img(src=`${album.albumArt}`)
+                          td.album-name= album.name
+                          td.album-name= album.Artist.name

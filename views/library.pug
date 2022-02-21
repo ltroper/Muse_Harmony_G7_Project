@@ -5,7 +5,7 @@ append head
 
 block content
     p(class= "hidden" id="userId")= userId
-    h2(id="libraryName")= libraryName
+    h2(id="libraryName")= nameToPass
     p line break
     p line break
     p line break
@@ -22,9 +22,9 @@ block content
         tbody
             each album in albumList
                 tr
-                    td(class="albumName")= album.dataValues.name
                     td
                         img(src=`${album.dataValues.albumArt}`)
+                    td(class="albumName")= album.dataValues.name
                     td
                         if locals.userId == user.id
                             button(class="removeAlbum" id=`album-${album.dataValues.id}`) Remove Album
