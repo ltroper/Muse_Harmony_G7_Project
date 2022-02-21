@@ -10,8 +10,29 @@ nav {
 
 .navbar {
   display: flex;
+  border-bottom: solid rgb(0, 0, 0);
   margin: 0;
   text-align: center;
+  height: 50px;
+}
+
+.webName {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 10px;
+  width: 500px;
+}
+
+.webName a {
+  text-align: center;
+  font-size: 20px;
+  font-weight: bolder;
+  text-decoration: none;
+}
+.signedInButtonsContainer {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .buttonsSigned {
@@ -20,6 +41,7 @@ nav {
   flex-direction: row;
   width: 100%;
   align-items: center;
+  padding-top: 13px;
 }
 
 .loginDemoCreateButtons {
@@ -27,48 +49,27 @@ nav {
   justify-content: flex-end;
   flex-direction: row;
   width: 100%;
+  align-items: center;
+  /* padding-top: 13px; */
+}
+
+.demo-btn {
+  padding-top: 15px;
 }
 
 button {
+  display: flex;
+  align-items: center;
   background-color: #ca8b42;
   border-radius: 7px;
   color: rgb(0, 0, 0);
-  margin: 10px;
   padding: 10px 20px;
-  text-align: center;
+  margin: 10px;
   text-decoration: none;
-  display: inline-block;
-  font-size: 10px;
-  display: flex;
+  font-size: 13px;
   cursor: pointer;
   flex-direction: row;
 }
-
-.webName {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  
-  padding: 0 10px;
-
-}
-
-.webName a {
-  font-size: 20px;
-  font-weight: bolder;
-  text-decoration: none;
-}
-
-/* .demo-btn {
-  background-color: #ca8b42;
-  color: rgb(0, 0, 0);
-  margin: 10px;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 10px;
-} */
 
 .login-button {
   background-color: rgba(0, 0, 0, 0.4);
@@ -78,19 +79,6 @@ button {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 10px;
-}
-
-.create-account {
-  background-color: #ca8b42;
-  color: rgb(0, 0, 0);
-  margin: 10px;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 10px;
-  flex-wrap: nowrap;
 }
 
 .modal-container {
@@ -114,10 +102,6 @@ button {
   background-color: #a09595;
 }
 
-.modal-show {
-  display: block;
-  width: auto;
-}
 /*style the model content box*/
 .modal-login-inputs {
   background-color: #fefefe;
@@ -182,18 +166,6 @@ img.logo-img {
   animation: animatezoom 0.6s;
 }
 
-.signedIn-button {
-  background-color: #ca8b42;
-  border-radius: 5px;
-  color: rgb(0, 0, 0);
-  margin: 10px;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 10px;
-}
-
 footer {
   position: absolute;
   bottom: 0;
@@ -220,9 +192,9 @@ footer {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 10px;
   background: #ca8b42;
   opacity: 1;
+  font-size: 12px;
 }
 
 .link-container a:hover {
@@ -235,42 +207,7 @@ button:hover {
   opacity: 0.8;
 }
 
-.login-button {
-  border-radius: 5px;
-  color: rgb(0, 0, 0);
-  margin: 10px;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 10px;
-}
-
-.create-account {
-  background-color: #ca8b42;
-  border-radius: 5px;
-  color: rgb(0, 0, 0);
-  margin: 10px;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 10px;
-}
-.demo-btn {
-  background-color: #ca8b42;
-  border-radius: 5px;
-  color: rgb(0, 0, 0);
-  margin: 10px;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 10px;
-}
-
 .muse-harmony {
   align-self: center;
   justify-content: flex-end;
 }
-

@@ -24,10 +24,6 @@
   background-color: #a09595;
 }
 
-.modal-show {
-  display: block;
-  width: auto;
-}
 /*style the model content box*/
 .modal-login-inputs {
   background-color: #fefefe;
