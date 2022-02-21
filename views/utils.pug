@@ -38,7 +38,9 @@ mixin signedOut
               input(type="password" name="confirmPassword" required)
             div.modal-btn
               button.submit-btn Submit
-        button.demo-btn Demo User
+        form.demo-btn(action='/users/demo' method='post')
+          input(type="hidden" name="_csrf" value=csrfToken)
+          button.demo-btn(type='submit') Demo User
 
 mixin signedIn
   head

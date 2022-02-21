@@ -7,6 +7,17 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 
 /* GET users listing. */
+router.post(
+  "/demo",
+  csrfProtection,
+  asyncHandler(async (req, res) => {
+    const user = await db.User.findByPk(4);
+    loginUser(req, res, user);
+    const userId = user.id;
+    return res.redirect(`/users/${userId}`);
+  })
+);
+
 router.get("/", requireAuth, function (req, res, next) {
   res.redirect("/:id");
 });
@@ -140,67 +151,69 @@ router.post(
 
 // work on this. REMOVE TRY CATCH.
 
-router.get("/:id", requireAuth, asyncHandler (async (req, res, next) => {
-  const userId = req.params.id;
-  const user = await db.User.findOne({
-    where: { id: userId },
-  });
+router.get(
+  "/:id",
+  requireAuth,
+  asyncHandler(async (req, res, next) => {
+    const userId = req.params.id;
+    const user = await db.User.findOne({
+      where: { id: userId },
+    });
 
-  //query to return an array of albums the user liked
-  const likedAlbums = await db.User.findAll({
-        where: {id: userId},
-        include: {
-          model: db.Album,
-          as: 'LikedAlbums'
-        }
-      })
+    //query to return an array of albums the user liked
+    const likedAlbums = await db.User.findAll({
+      where: { id: userId },
+      include: {
+        model: db.Album,
+        as: "LikedAlbums",
+      },
+    });
 
-  //passing into pug
-  const albums = likedAlbums[0].LikedAlbums
+    //passing into pug
+    const albums = likedAlbums[0].LikedAlbums;
 
-  //query to grab the array of albums with libraries
-  const userLibrary = await db.User.findAll({
-    where: {id: userId},
-    include: {
-      model: db.Album,
-      as: 'AlbumLibraries'
-    },
-    limit: 10
-  })
+    //query to grab the array of albums with libraries
+    const userLibrary = await db.User.findAll({
+      where: { id: userId },
+      include: {
+        model: db.Album,
+        as: "AlbumLibraries",
+      },
+      limit: 10,
+    });
 
-  //creates an array of library names
-    const albumsOfLibrary = userLibrary[0].AlbumLibraries
+    //creates an array of library names
+    const albumsOfLibrary = userLibrary[0].AlbumLibraries;
     const names = new Set();
-    let libraryNames = []
-    for (let i = 0; i < albumsOfLibrary.length; i++){
-      names.add(albumsOfLibrary[i].dataValues.AlbumLibrary.dataValues.name)
+    let libraryNames = [];
+    for (let i = 0; i < albumsOfLibrary.length; i++) {
+      names.add(albumsOfLibrary[i].dataValues.AlbumLibrary.dataValues.name);
     }
     // console.log(names)
-    for (let item of names){
-      libraryNames.push(item)
+    for (let item of names) {
+      libraryNames.push(item);
     }
 
-  // Creates an array of albums with reviews
-  const reviewList = await db.User.findAll({
-    where: {id: userId},
-    include: {
-      model: db.Album,
-      as: 'Reviews'
-    },
-    limit: 10
-  })
-  const reviews = reviewList[0].Reviews
+    // Creates an array of albums with reviews
+    const reviewList = await db.User.findAll({
+      where: { id: userId },
+      include: {
+        model: db.Album,
+        as: "Reviews",
+      },
+      limit: 10,
+    });
+    const reviews = reviewList[0].Reviews;
 
-  // const loggedIn = req.session.auth
-  // // if(loggedIn.userId == userId){
-  //   const editProfile = true;
-  //   res.render("profile", {user, albums, reviews, libraryNames, editProfile})
-  // // } else{
+    // const loggedIn = req.session.auth
+    // // if(loggedIn.userId == userId){
+    //   const editProfile = true;
+    //   res.render("profile", {user, albums, reviews, libraryNames, editProfile})
+    // // } else{
     // const editProfile = false;
-    res.render("profile", {user, albums, reviews, libraryNames})
-// }
-
-}))
-
+    res.render("profile", { user, albums, reviews, libraryNames });
+    // }
+  })
+);
 
 module.exports = router;
