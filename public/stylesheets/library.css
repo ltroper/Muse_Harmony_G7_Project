@@ -19,3 +19,7 @@
 body {
   background-color: antiquewhite;
 }
+
+.hidden {
+  display: none;
+}

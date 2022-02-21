@@ -5,6 +5,7 @@ append head
     link(rel="stylesheet" href="/stylesheets/library.css")
 
 block content
+    p(class= "hidden" id="userId" )= userId
     .library-container(id="libraryName")= nameToPass
         a(href="/albums")
             button(id= "removeLibraryButton" type='submit') Remove Library
