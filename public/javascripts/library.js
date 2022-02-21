@@ -1,5 +1,5 @@
 const removeLibraryButton = document.getElementById("removeLibraryButton");
-const userId = document.getElementsByClassName("userId").innerHTML;
+const userId = document.getElementsById("userId").innerHTML;
 const libraryName = document.getElementById("libraryName").innerHTML;
 const manyRemoveAlbum = document.getElementsByClassName("removeAlbum");
 
