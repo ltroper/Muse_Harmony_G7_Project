@@ -1,7 +1,15 @@
 const removeLibraryButton = document.getElementById("removeLibraryButton");
-const userId = document.getElementsById("userId").innerHTML;
-const libraryName = document.getElementById("libraryName").innerHTML;
+const userId = document.getElementById("userId").innerHTML;
+const libraryNameNotFactored = document.getElementById("libraryName").innerHTML;
 const manyRemoveAlbum = document.getElementsByClassName("removeAlbum");
+
+
+
+const libraryArr = libraryNameNotFactored.split("<")[0];
+const libraryString = libraryArr.split(" ");
+const libraryName = libraryString.join("-")
+
+
 
 removeLibraryButton.addEventListener("click", async (e) => {
   const res = await fetch(`/libraries/${libraryName}`, {

@@ -10,6 +10,7 @@ const cancelButton = document.getElementsByClassName("cancel-review-button activ
 const albumIdCollection = document.getElementsByClassName("hide")
 const albumId = Array.from(albumIdCollection)[0]
 
+
 const changeButtons = (e) =>{
 
     const elementId = e.target.parentNode.id.split('-')[1];
@@ -101,7 +102,7 @@ Array.from(editReviewButtons).forEach((editButton) => {
                   }
             })
         })
-        
+
         Array.from(cancelButton).forEach((singleCancel) => {
             singleCancel.addEventListener("click", async (e) => {
                 const cancelId =e.target.id.split("-")[1];
