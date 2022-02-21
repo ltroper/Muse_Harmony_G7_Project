@@ -26,7 +26,7 @@ block content
                     tr.review-row
                         td(id=`content-${review.id}`)=review.content
                         td(id=`rating-${review.id}`)=(`${review.rating}/10`)
-                        td(id=`review-${review.id}`)
+                        td.btns(id=`review-${review.id}`)
                             if locals.userId == review.userId
                                 Button(class="edit-review-button active" id=`edit-${review.id}`) Edit
                                 Button(class="delete-review-button active" id=`delete-${review.id}`) Delete

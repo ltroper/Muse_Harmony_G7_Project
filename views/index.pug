@@ -25,10 +25,9 @@ block content
         // Next and previous buttons
         a.prev &#x276E;
         a.next &#x276F;
-      .middleContainer
+      .page-container
         .albums-container
-          .albumList-container1
-            table.album-table
+          table.album-table
               thead
                   tr
                       th.album-tableHead
@@ -36,9 +35,9 @@ block content
                       th.album-tableHead Artist
               tbody
                   each album in albums
-                      tr
+                      tr.row-container
                           td.album-art
                               a(href=`/albums/${album.id}`)
-                                img(src=`${album.albumArt}`)
+                                  img(src=`${album.albumArt}`)
                           td.album-name= album.name
                           td.album-name= album.Artist.name

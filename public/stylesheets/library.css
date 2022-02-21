@@ -1,0 +1,21 @@
+.library-container {
+  display: flex;
+  width: 1000px;
+  margin: auto auto;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: white;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.table-container {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+body {
+  background-color: antiquewhite;
+}

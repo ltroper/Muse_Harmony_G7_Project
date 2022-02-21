@@ -6,7 +6,7 @@ mixin signedOut
           a(href= "/") MUSE HARMONY
         .loginDemoCreateButtons
           button.login-button.modal-show(onclick="document.getElementById('modal-login').style.display='block'") Login
-          button.create-account.modal-show(onclick="document.getElementById('modal').style.display='block'") Create account
+          button.create-account.modal-show(onclick="document.getElementById('modal-create').style.display='block'") Create account
           form.demo-btn(action='/users/demo' method='post')
             input(type="hidden" name="_csrf" value=csrfToken)
             button(type='submit') Demo User
@@ -28,7 +28,7 @@ mixin signedOut
         //- vvv Create Account Modal vvv -//
         div.modal-container#modal-create
           form.modal-form(action="/users/signup" method="POST")
-            span.close-btn(onclick="document.getElementById('modal').style.display='none'")
+            span.close-btn(onclick="document.getElementById('modal-create').style.display='none'")
               i(class="fa-solid fa-rectangle-xmark")
             div.modal-img
               img.logo-img(src='./images/muse.png' alt='Logo of Muse')

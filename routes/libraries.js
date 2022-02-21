@@ -48,7 +48,6 @@ router.get(
     for (let i = 0; i < uniqueNameArr.length; i++) {
       let name = uniqueNameArr[i];
 
-
       const albumsList = await db.User.findAll({
         where: {
           id: userId,
@@ -65,8 +64,8 @@ router.get(
           },
         ],
       });
-      let obj = {}
-      obj[name] =  albumsList[0].AlbumLibraries
+      let obj = {};
+      obj[name] = albumsList[0].AlbumLibraries;
       userLibraries.push(obj);
     }
 
@@ -74,14 +73,19 @@ router.get(
   })
 );
 
-router.get('/add/:albumId', csrfProtection, requireAuth, asyncHandler( (req, res) => {
-  const albumId = req.params.albumId;
-  res.render('libraryAdd', {
-    title: 'Add library',
-    csrfToken: req.csrfToken(),
-    albumId
-  });
-}));
+router.get(
+  "/add/:albumId",
+  csrfProtection,
+  requireAuth,
+  asyncHandler((req, res) => {
+    const albumId = req.params.albumId;
+    res.render("libraryAdd", {
+      title: "Add library",
+      csrfToken: req.csrfToken(),
+      albumId,
+    });
+  })
+);
 
 router.get(
   "/:name",
@@ -124,15 +128,14 @@ router.get(
       ],
     });
 
-    console.log(userLibrary[0].AlbumLibraries);
+    // console.log(userLibrary[0].AlbumLibraries);
     // console.log(userId);
     const albumList = userLibrary[0].AlbumLibraries;
-    const nameNoDashesArr = name.split("-")
-    const nameToPass = nameNoDashesArr.join(" ")
+    const nameNoDashesArr = name.split("-");
+    const nameToPass = nameNoDashesArr.join(" ");
     res.render("library", { albumList, nameToPass, user });
   })
 );
-
 
 router.post(
   "/add/:albumId",
@@ -142,15 +145,15 @@ router.post(
     //from the profile page & the library list, click a button and a form will prompt the user to be able to add a library
     //restrict name to just letters, spaces, and numbers
     //name in data base has dashes for spaces
-    const albumId = req.params.albumId
+    const albumId = req.params.albumId;
     const unfactoredName = req.body.libraryName;
-    const libArray = unfactoredName.split(" ")
-    const name = libArray.join("-")
+    const libArray = unfactoredName.split(" ");
+    const name = libArray.join("-");
 
     const newLibrary = await db.AlbumLibrary.create({
       name,
       userId: res.locals.userId,
-      albumId
+      albumId,
     });
 
     res.redirect(`/libraries`);
@@ -187,66 +190,73 @@ router.post(
   })
 );
 
-router.post("/:name", asyncHandler (async (req, res) => {
-  const {name, userId, albumId} = req.body
+router.post(
+  "/:name",
+  asyncHandler(async (req, res) => {
+    const { name, userId, albumId } = req.body;
 
-  const test = await db.AlbumLibrary.findOne({
-    where: {
-      name,
-    userId,
-    albumId
-    }
-  })
-  if (!test){
-    const newLibrary = await db.AlbumLibrary.create({
-      name,
-      userId,
-      albumId
+    const test = await db.AlbumLibrary.findOne({
+      where: {
+        name,
+        userId,
+        albumId,
+      },
     });
-    res.json({newLibrary})
-  }
-
-
-}))
-
-router.delete("/:name", asyncHandler(async (req, res) => {
-  const name = req.params.name;
-  const userId = res.locals.userId;
-
-  // console.log(`NAME: ${name}`)
-
-  const library = await db.AlbumLibrary.findAll({
-    where: {
-      name,
-      userId
+    if (!test) {
+      const newLibrary = await db.AlbumLibrary.create({
+        name,
+        userId,
+        albumId,
+      });
+      res.json({ newLibrary });
     }
   })
-  if (library){
-    for (let i = 0; i < library.length; i++){
-      await library[i].destroy()
-    }
-    // res.json({library})
-    console.log("redirecting")
-    res.redirect("/libraries")
-  }
-}))
+);
 
-router.delete("/:name/:albumId", asyncHandler(async (req, res) => {
-  const name = req.params.name;
-  const userId = res.locals.userId;
-  const albumId = req.params.albumId;
+router.delete(
+  "/:name",
+  asyncHandler(async (req, res) => {
+    const name = req.params.name;
+    const userId = res.locals.userId;
 
-  const album = await db.AlbumLibrary.findOne({
-    where: {
-      name,
-      userId,
-      albumId
+    // console.log(`NAME: ${name}`)
+
+    const library = await db.AlbumLibrary.findAll({
+      where: {
+        name,
+        userId,
+      },
+    });
+    if (library) {
+      for (let i = 0; i < library.length; i++) {
+        await library[i].destroy();
+      }
+      // res.json({library})
+      console.log("redirecting");
+      res.redirect("/libraries");
     }
   })
-  if (album){
-    await album.destroy()
-  }
-  res.json(album)
-}))
+);
+
+router.delete(
+  "/:name/:albumId",
+  asyncHandler(async (req, res) => {
+    const name = req.params.name;
+    const userId = res.locals.userId;
+    const albumId = req.params.albumId;
+
+    const album = await db.AlbumLibrary.findOne({
+      where: {
+        name,
+        userId,
+        albumId,
+      },
+    });
+    if (album) {
+      await album.destroy();
+    }
+    res.json(album);
+  })
+);
 
 module.exports = router;

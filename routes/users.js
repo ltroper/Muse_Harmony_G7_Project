@@ -134,7 +134,8 @@ router.post(
     const user = await db.User.build({
       username,
       email,
-      profilePicture: "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/250.jpg"
+      profilePicture:
+        "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/250.jpg",
     });
 
     const validatorErrors = validationResult(req);

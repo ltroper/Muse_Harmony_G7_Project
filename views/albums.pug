@@ -5,31 +5,31 @@ append head
     script(src="/javascripts/allAlbums.js" type="module")
 
 block content
-    div.albums-container
-        p(class= "hidden" id="userId")= userId
-        table.album-table
-            thead
-                tr
-                    th.album-tableHead
-                    th.album-tableHead Album Name
-                    th.album-tableHead Artist
-            tbody
-                each album in albums
-                    tr.row-container
-                        td.album-art
-                            a(href=`/albums/${album.id}`)
-                                img(src=`${album.albumArt}`)
-
-                        td.album-name= album.name
-                        td.album-name= album.Artist.name
-                        td.btn-container
-                            if (locals.userId)
-                                form(action=`/libraries/add/${album.id}` method="GET")
-                                    button.new-library-btn Create new Library with Album
-                                button(class="addToLibrary" id=`album-${album.id}`) Add To Library
-                                button(class="cancel hidden" id=`cancel-${album.id}`) Cancel
-                                select(class="dropDown hidden" id=`dropDown-${album.id}`)
-                                    option(id= "default" selected='selected') My Libraries
-                                    each name in libraryNames
-                                        option= name
-                                p(class="success hidden" id=`success-${album.id}`) Added to Library!
+    .page-container
+        .albums-container
+            p(class= "hidden" id="userId")= userId
+            table.album-table
+                thead
+                    tr
+                        th.album-tableHead
+                        th.album-tableHead Album Name
+                        th.album-tableHead Artist
+                tbody
+                    each album in albums
+                        tr.row-container
+                            td.album-art
+                                a(href=`/albums/${album.id}`)
+                                    img(src=`${album.albumArt}`)
+                            td.album-name= album.name
+                            td.album-name= album.Artist.name
+                            td.btn-container
+                                if (locals.userId)
+                                    form(action=`/libraries/add/${album.id}` method="GET")
+                                        button.new-library-btn Create new Library with Album
+                                    button(class="addToLibrary" id=`album-${album.id}`) Add To Library
+                                    button(class="cancel hidden" id=`cancel-${album.id}`) Cancel
+                                    select(class="dropDown hidden" id=`dropDown-${album.id}`)
+                                        option(id= "default" selected='selected') My Libraries
+                                        each name in libraryNames
+                                            option= name
+                                    p(class="success hidden" id=`success-${album.id}`) Added to Library!
