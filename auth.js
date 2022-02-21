@@ -40,11 +40,9 @@ const restoreUser = async (req, res, next) => {
   }
 };
 
-
-
 module.exports = {
   loginUser,
   logoutUser,
   requireAuth,
-  restoreUser
+  restoreUser,
 };
