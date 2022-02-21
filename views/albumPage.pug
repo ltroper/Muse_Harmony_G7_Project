@@ -14,6 +14,7 @@ block content
                 p= `Artist: ${album.Artist.dataValues.name}`
                 p= `Genre: ${album.genre}`
                 p= `Release date: ${album.releaseDate}`
+                p(class=`hide`)= album.id
         form.review-form(action=`/albums/${album.id}` method="POST")
             label(for="review") What did you think of this album?
             textarea(name="review" cols="30" rows="10" required)
