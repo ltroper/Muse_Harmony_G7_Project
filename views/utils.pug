@@ -3,10 +3,10 @@ mixin signedOut
     nav
       .navbar
         .webName
-          a(href= "/") MUSE HARMONY
+          a(href= "/") ♫ MUSE HARMONY ♫
         .loginDemoCreateButtons
-          button.login-button.modal-show(onclick="document.getElementById('modal-login').style.display='block'") Login
-          button.create-account.modal-show(onclick="document.getElementById('modal-create').style.display='block'") Create account
+          button.login-button(onclick="document.getElementById('modal-login').style.display='block'") Login
+          button.create-account(onclick="document.getElementById('modal-create').style.display='block'") Create account
           form.demo-btn(action='/users/demo' method='post')
             input(type="hidden" name="_csrf" value=csrfToken)
             button(type='submit') Demo User
@@ -52,7 +52,7 @@ mixin signedIn
     nav
       .navbar
         .webName
-          a(href= "/") MUSE HARMONY
+          a(href= "/") ♫ MUSE HARMONY ♫
         .buttonsSigned
           form(action='/albums' method='get')
               button(type='submit') Albums

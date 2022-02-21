@@ -1,37 +1,39 @@
 extends layout.pug
 
+append head
+    link(rel="stylesheet" href="/stylesheets/profile.css")
+
+
 block content
-    body
-        .mainProfileContainer
-            .main
-                .leftColumn
-                    p= user.username
-                    img(src=`${user.profilePicture}`)
-                .middleColumn
-                    p= user.biography
-                    table
-                        thead
-                            tr
-                                th(scope='col') Liked Albums
-                        tbody
-                            each album in albums
-                                tr
-                                    td= album.dataValues.name
-                    table
-                        thead
-                            tr
-                                th(scope='col') Reviews
-                        tbody
-                            each review in reviews
-                                tr
-                                    td= review.dataValues.name
-                                    td= review.dataValues.Review.content
-                    table
-                        thead
-                            tr
-                                th(scope='col') Album Libraries
-                        tbody
-                            each library in libraryNames
-                                tr
-                                    td= library
-            .rightColumn
+    .mainProfileContainer
+        .leftColumn
+            img(src=`${user.profilePicture}`)
+            p.userName= user.username
+            p.bio= user.biography
+        .middleColumn
+            table
+                thead
+                    tr
+                        th(scope='col') My Albums
+                tbody
+                    each library in libraryNames
+                        tr
+                            td= library
+            table
+                thead
+                    tr
+                        th(scope='col') Liked Albums
+                tbody
+                    each album in albums
+                        tr
+                            td= album.dataValues.name
+            table
+                thead
+                    tr
+                        th(scope='col') My Reviews
+                tbody
+                    each review in reviews
+                        tr
+                            td= review.dataValues.name
+                            td= review.dataValues.Review.content
+    .rightColumn
