@@ -20,16 +20,17 @@ body {
 
 .album-table {
   background-color: white;
+  padding: 10px 10px;
 }
 
 .album-tableHead {
   padding: 10px;
-  font-size: 40px;
+  font-size: 30px;
   justify-content: center;
 }
 .album-name {
   padding: 10px;
-  font-size: 35px;
+  font-size: 20px;
   justify-content: center;
 }
 
@@ -40,14 +41,15 @@ body {
   flex-direction: column;
 }
 
-button,
 .dropDown,
 .addToLibrary,
-.cancel {
+.cancel,
+.new-library-btn {
   background-color: #ca8b42;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
+  border-radius: 5px;
   border: none;
   cursor: pointer;
   width: 100%;
