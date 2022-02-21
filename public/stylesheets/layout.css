@@ -6,17 +6,9 @@ nav {
 .navbar {
   display: flex;
   flex-direction: row;
-  margin: 0;
+  margin: 10px;
   justify-content: flex-end;
   text-align: center;
-}
-
-.logo {
-  flex: 1;
-}
-
-.logo img {
-  float: left;
 }
 
 .modal-container {
@@ -190,4 +182,20 @@ button:hover {
   text-decoration: none;
   display: inline-block;
   font-size: 10px;
+}
+.demo-btn {
+  background-color: #ca8b42;
+  border-radius: 5px;
+  color: rgb(0, 0, 0);
+  margin: 10px;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 10px;
+}
+
+.muse-harmony {
+  align-self: center;
+  justify-content: flex-end;
 }

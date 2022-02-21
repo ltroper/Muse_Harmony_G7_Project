@@ -1,4 +1,28 @@
 .hidden {
-    visibility: hidden;
+  visibility: hidden;
 }
 
+c .album-page {
+  width: 1000px;
+  margin: auto auto;
+  background-color: white;
+}
+
+img {
+  border-radius: 5%;
+  width: 500;
+  height: 500;
+  object-fit: cover;
+  padding: 5px;
+}
+.album-info {
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 50px;
+}
+
+.info-container {
+  padding: 10px;
+  font-size: 35px;
+  justify-content: center;
+}
