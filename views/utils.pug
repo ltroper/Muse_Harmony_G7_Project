@@ -2,8 +2,15 @@ mixin signedOut
   header
     nav
       .navbar
-        a.muse-harmony(href='/') Muse Harmony
-        button.login-button.modal-show(onclick="document.getElementById('modal-login').style.display='block'") Login
+        .webName
+          a(href= "/") MUSE HARMONY
+        .loginDemoCreateButtons
+          button.login-button.modal-show(onclick="document.getElementById('modal-login').style.display='block'") Login
+          button.create-account.modal-show(onclick="document.getElementById('modal').style.display='block'") Create account
+          form.demo-btn(action='/users/demo' method='post')
+            input(type="hidden" name="_csrf" value=csrfToken)
+            button(type='submit') Demo User
+        //- vvv Login Modal vvv -//
         div.modal-container#modal-login
           form.modal-form(action="/users/login" method="POST")
             span.close-btn(onclick="document.getElementById('modal-login').style.display='none'")
@@ -18,8 +25,8 @@ mixin signedOut
               input(type="password" name="password" required)
             div.modal-btn
               button.submit-btn Submit
-        button.create-account.modal-show(onclick="document.getElementById('modal').style.display='block'") Create account
-        div.modal-container#modal
+        //- vvv Create Account Modal vvv -//
+        div.modal-container#modal-create
           form.modal-form(action="/users/signup" method="POST")
             span.close-btn(onclick="document.getElementById('modal').style.display='none'")
               i(class="fa-solid fa-rectangle-xmark")
@@ -39,23 +46,22 @@ mixin signedOut
               input(type='text' name='biography' required)
             div.modal-btn
               button.submit-btn Submit
-        form.demo-btn(action='/users/demo' method='post')
-          input(type="hidden" name="_csrf" value=csrfToken)
-          button(type='submit') Demo User
 
 mixin signedIn
   header
     nav
       .navbar
-        a.muse-harmony(href='/') Muse Harmony
-        form.signedIn-button(class='logout' action='/albums' method='get')
-            button(type='submit') Albums
-        form.signedIn-button(class='logout' action='/libraries' method='get')
-            button(type='submit') Libraries
-        form.signedIn-button(class='logout' action=`/users/${locals.userId}` method='get')
-            button(type='submit') My Profile
-        form.signedIn-button(class='logout' action='/users/logout' method='post')
-            button(type='submit') Logout
+        .webName
+          a(href= "/") MUSE HARMONY
+        .buttonsSigned
+          form(action='/albums' method='get')
+              button(type='submit') Albums
+          form(action='/libraries' method='get')
+              button(type='submit') Libraries
+          form(action=`/users/${locals.userId}` method='get')
+              button(type='submit') My Profile
+          form(action='/users/logout' method='post')
+              button(type='submit') Logout
 
 mixin validationErrorSummary(errors)
   if errors
